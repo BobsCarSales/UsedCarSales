@@ -15,6 +15,10 @@ namespace UsedCarSales
         public Form1()
         {
             InitializeComponent();
+
+            Database database = Database.Instance;
+            database.openConnection();
+            database.test();
         }
     }
 }
