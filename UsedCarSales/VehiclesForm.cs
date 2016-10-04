@@ -10,15 +10,11 @@ using System.Windows.Forms;
 
 namespace UsedCarSales
 {
-    public partial class Form1 : Form
+    public partial class VehiclesForm : Form
     {
-        public Form1()
+        public VehiclesForm()
         {
             InitializeComponent();
-
-            Database database = Database.Instance;
-            database.openConnection();
-            database.test();
         }
     }
 }
