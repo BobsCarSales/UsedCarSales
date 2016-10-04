@@ -14,7 +14,10 @@ namespace UsedCarSales
         public bool? Sold { get; set; }
         public int? Model { get; set; }
 
-        
+        public override string ToString()
+        {
+            return (Id.ToString() + " - " + Model.ToString());
+        }
 
     }
 }
