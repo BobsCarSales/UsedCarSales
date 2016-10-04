@@ -27,7 +27,7 @@ namespace UsedCarSales
         {
             // Associate the event-handling method with the 
             // SelectedIndexChanged event.
-            this.makeDropDownBox.SelectedIndexChanged += new System.EventHandler(LoadModels);
+            this.makeDropDownBox.SelectedValueChanged += new System.EventHandler(LoadModels);
         }
 
         //will only be called once when the VehiclesFrom loads
@@ -53,13 +53,13 @@ namespace UsedCarSales
             if(makeDropDownBox.SelectedItem != null)
             {
                 //makeDropDownBox uses the Make's id as the value member
-                //int selectedMakeId = (int)makeDropDownBox.SelectedItem;
+                Make selectedMake = (Make)makeDropDownBox.SelectedItem;
 
-                //List<Model> models = db.GetModelByMakeId(selectedMakeId);
+                List<Model> models = db.GetModelByMakeId(selectedMake.Id);
 
-                //modelDropDownBox.DisplayMember = "Name";
-                //modelDropDownBox.ValueMember = "Id";
-                //modelDropDownBox.DataSource = models;
+                modelDropDownBox.DisplayMember = "Name";
+                modelDropDownBox.ValueMember = "Id";
+                modelDropDownBox.DataSource = models;
             }
         }
     }
