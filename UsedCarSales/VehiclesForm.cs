@@ -14,6 +14,11 @@ namespace UsedCarSales
     {
         Database db;
 
+        public Make selectedMake;
+        public Model selectedModel;
+        public bool used = false;
+        public bool sold = false;
+
         public VehiclesForm()
         {
             db = Database.Instance;
@@ -39,11 +44,6 @@ namespace UsedCarSales
             makeDropDownBox.DisplayMember = "Name";
             makeDropDownBox.ValueMember = "Id";
             makeDropDownBox.DataSource = allMakes;
-
-            //makeDropDownBox.SelectionChangeCommitted += (object sender, EventArgs e) => {
-            //    Console.WriteLine("Selected Text:" + makeDropDownBox.SelectedText);
-            //    Console.WriteLine("Selected Value:" + makeDropDownBox.SelectedValue.ToString());
-            //};
         }
 
         //TODO: will be called everytime makeDropDown changes, need to move some of the init stuff out
@@ -53,7 +53,7 @@ namespace UsedCarSales
             if(makeDropDownBox.SelectedItem != null)
             {
                 //makeDropDownBox uses the Make's id as the value member
-                Make selectedMake = (Make)makeDropDownBox.SelectedItem;
+                selectedMake = (Make)makeDropDownBox.SelectedItem;
 
                 List<Model> models = db.GetModelByMakeId(selectedMake.Id);
 
@@ -61,6 +61,25 @@ namespace UsedCarSales
                 modelDropDownBox.ValueMember = "Id";
                 modelDropDownBox.DataSource = models;
             }
+        }
+
+        private void searchVehicleButton_Click(object sender, EventArgs e)
+        {
+            Vehicle vehicle = new Vehicle();
+
+            selectedModel = (Model)modelDropDownBox.SelectedItem;
+            used = usedCheckBox.Checked;
+            sold = usedCheckBox.Checked;
+
+            vehicle.Model = selectedModel.Id;
+            vehicle.Used = used;
+            vehicle.Sold = sold;
+
+            List<Vehicle> vehicles = db.searchVehicle(vehicle);
+
+            vehiclesListBox.DisplayMember = "Id";
+            vehiclesListBox.ValueMember = "Id";
+            vehiclesListBox.DataSource = vehicles;
         }
     }
 }

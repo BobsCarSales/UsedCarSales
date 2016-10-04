@@ -39,6 +39,7 @@
             this.viewVehicleButton = new System.Windows.Forms.Button();
             this.editVehicleButton = new System.Windows.Forms.Button();
             this.removeVehicle = new System.Windows.Forms.Button();
+            this.vehiclesListBox = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // addVehicleButton
@@ -115,6 +116,7 @@
             this.searchVehicleButton.TabIndex = 9;
             this.searchVehicleButton.Text = "Search Vehicles";
             this.searchVehicleButton.UseVisualStyleBackColor = true;
+            this.searchVehicleButton.Click += new System.EventHandler(this.searchVehicleButton_Click);
             // 
             // viewVehicleButton
             // 
@@ -143,11 +145,21 @@
             this.removeVehicle.Text = "Remove Vehicle";
             this.removeVehicle.UseVisualStyleBackColor = true;
             // 
+            // vehiclesListBox
+            // 
+            this.vehiclesListBox.FormattingEnabled = true;
+            this.vehiclesListBox.ItemHeight = 16;
+            this.vehiclesListBox.Location = new System.Drawing.Point(20, 90);
+            this.vehiclesListBox.Name = "vehiclesListBox";
+            this.vehiclesListBox.Size = new System.Drawing.Size(381, 196);
+            this.vehiclesListBox.TabIndex = 13;
+            // 
             // VehiclesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(565, 304);
+            this.Controls.Add(this.vehiclesListBox);
             this.Controls.Add(this.removeVehicle);
             this.Controls.Add(this.editVehicleButton);
             this.Controls.Add(this.viewVehicleButton);
@@ -179,5 +191,6 @@
         private System.Windows.Forms.Button viewVehicleButton;
         private System.Windows.Forms.Button editVehicleButton;
         private System.Windows.Forms.Button removeVehicle;
+        private System.Windows.Forms.ListBox vehiclesListBox;
     }
 }
