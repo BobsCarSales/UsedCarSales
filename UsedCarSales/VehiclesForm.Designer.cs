@@ -32,7 +32,7 @@
             this.makeLabel = new System.Windows.Forms.Label();
             this.Model = new System.Windows.Forms.Label();
             this.makeDropDownBox = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.modelDropDownBox = new System.Windows.Forms.ComboBox();
             this.usedCheckBox = new System.Windows.Forms.CheckBox();
             this.soldCheckBox = new System.Windows.Forms.CheckBox();
             this.searchVehicleButton = new System.Windows.Forms.Button();
@@ -70,19 +70,20 @@
             // 
             // makeDropDownBox
             // 
+            this.makeDropDownBox.DisplayMember = "(none)";
             this.makeDropDownBox.FormattingEnabled = true;
             this.makeDropDownBox.Location = new System.Drawing.Point(90, 12);
             this.makeDropDownBox.Name = "makeDropDownBox";
             this.makeDropDownBox.Size = new System.Drawing.Size(230, 24);
             this.makeDropDownBox.TabIndex = 5;
             // 
-            // comboBox1
+            // modelDropDownBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(90, 42);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(230, 24);
-            this.comboBox1.TabIndex = 6;
+            this.modelDropDownBox.FormattingEnabled = true;
+            this.modelDropDownBox.Location = new System.Drawing.Point(90, 42);
+            this.modelDropDownBox.Name = "modelDropDownBox";
+            this.modelDropDownBox.Size = new System.Drawing.Size(230, 24);
+            this.modelDropDownBox.TabIndex = 6;
             // 
             // usedCheckBox
             // 
@@ -153,7 +154,7 @@
             this.Controls.Add(this.searchVehicleButton);
             this.Controls.Add(this.soldCheckBox);
             this.Controls.Add(this.usedCheckBox);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.modelDropDownBox);
             this.Controls.Add(this.makeDropDownBox);
             this.Controls.Add(this.Model);
             this.Controls.Add(this.makeLabel);
@@ -171,7 +172,7 @@
         private System.Windows.Forms.Label makeLabel;
         private System.Windows.Forms.Label Model;
         private System.Windows.Forms.ComboBox makeDropDownBox;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox modelDropDownBox;
         private System.Windows.Forms.CheckBox usedCheckBox;
         private System.Windows.Forms.CheckBox soldCheckBox;
         private System.Windows.Forms.Button searchVehicleButton;

@@ -71,9 +71,9 @@ namespace UsedCarSales
             MySqlCommand command = new MySqlCommand(query, connection);
 
             //add vehicle values to command to be executed by the database
-            command.Parameters.AddWithValue("@used", vehicle.used);
-            command.Parameters.AddWithValue("@sold", vehicle.sold);
-            command.Parameters.AddWithValue("@model", vehicle.model);
+            command.Parameters.AddWithValue("@used", vehicle.Used);
+            command.Parameters.AddWithValue("@sold", vehicle.Sold);
+            command.Parameters.AddWithValue("@model", vehicle.Model);
             command.ExecuteNonQuery();
 
             //TODO: print vehicle information for debugging
@@ -87,14 +87,14 @@ namespace UsedCarSales
             MySqlCommand command = new MySqlCommand(query, connection);
 
             //need the ID to edit the specific vehicle
-            command.Parameters.AddWithValue("@id", vehicle.id);
+            command.Parameters.AddWithValue("@id", vehicle.Id);
 
-            command.Parameters.AddWithValue("@used", vehicle.used);
-            command.Parameters.AddWithValue("@sold", vehicle.sold);
-            command.Parameters.AddWithValue("@model", vehicle.model);
+            command.Parameters.AddWithValue("@used", vehicle.Used);
+            command.Parameters.AddWithValue("@sold", vehicle.Sold);
+            command.Parameters.AddWithValue("@model", vehicle.Model);
             command.ExecuteNonQuery();
 
-            Console.WriteLine("Vehicle {0} edited successfully", vehicle.id);
+            Console.WriteLine("Vehicle {0} edited successfully", vehicle.Id);
         }
 
         public void deleteVehicle(Vehicle vehicle)
@@ -103,9 +103,9 @@ namespace UsedCarSales
 
             MySqlCommand command = new MySqlCommand(query, connection);
 
-            command.Parameters.AddWithValue("@id", vehicle.id);
+            command.Parameters.AddWithValue("@id", vehicle.Id);
 
-            Console.WriteLine("Vehicle {0} deleted successfully", vehicle.id);
+            Console.WriteLine("Vehicle {0} deleted successfully", vehicle.Id);
         }
 
         public List<Vehicle> searchVehicle(Vehicle vehicle)
@@ -114,13 +114,13 @@ namespace UsedCarSales
 
             //TODO: write a function to make this simpler. just trying to get it working before tuesday
             int count = 0;
-            if (vehicle.used != null)
+            if (vehicle.Used != null)
             {
                 //add used to the query
                 query += "used=@used";
                 count++;
             }
-            if (vehicle.sold != null)
+            if (vehicle.Sold != null)
             {
                 //if we already have a WHERE clause, add an AND clause
                 if (count > 0)
@@ -131,7 +131,7 @@ namespace UsedCarSales
                 query += "sold=@sold";
                 count++;
             }
-            if (vehicle.model != null)
+            if (vehicle.Model != null)
             {
                 //if we already have a WHERE clause, add an AND clause
                 if (count > 0)
@@ -145,17 +145,17 @@ namespace UsedCarSales
 
             MySqlCommand command = new MySqlCommand(query, connection);
 
-            if (vehicle.used != null)
+            if (vehicle.Used != null)
             {
-                command.Parameters.AddWithValue("@used", vehicle.used);
+                command.Parameters.AddWithValue("@used", vehicle.Used);
             }
-            if (vehicle.sold != null)
+            if (vehicle.Sold != null)
             {
-                command.Parameters.AddWithValue("@sold", vehicle.sold);
+                command.Parameters.AddWithValue("@sold", vehicle.Sold);
             }
-            if (vehicle.model != null)
+            if (vehicle.Model != null)
             {
-                command.Parameters.AddWithValue("@model", vehicle.model);
+                command.Parameters.AddWithValue("@model", vehicle.Model);
             }
 
             MySqlDataReader reader = command.ExecuteReader();
@@ -168,10 +168,10 @@ namespace UsedCarSales
             {
                 v = new Vehicle();
 
-                v.id = Int32.Parse(reader["id"].ToString());
-                v.used = Boolean.Parse(reader["used"].ToString());
-                v.sold = Boolean.Parse(reader["sold"].ToString());
-                v.model = Int32.Parse(reader["model"].ToString());
+                v.Id = Int32.Parse(reader["id"].ToString());
+                v.Used = Boolean.Parse(reader["used"].ToString());
+                v.Sold = Boolean.Parse(reader["sold"].ToString());
+                v.Model = Int32.Parse(reader["model"].ToString());
 
                 vehicles.Add(v);
             }
@@ -183,29 +183,52 @@ namespace UsedCarSales
             return vehicles;
         }
 
-        public void test()
+        public List<Make> GetAllMakes()
         {
-            //TODO: i have not actually completely confirmed that any of this works correctly yet
+            List<Make> allMakes = new List<Make>();
 
-            Vehicle vehicle = new Vehicle();
-            vehicle.sold = false;
-            vehicle.used = true;
-            vehicle.model = 2;
+            var query = "SELECT * FROM Make";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlDataReader reader = command.ExecuteReader();
 
-            addVehicle(vehicle);
-
-            vehicle.sold = true;
-            vehicle.used = null;
-            editVehicle(vehicle);
-
-            List<Vehicle> vehicles = searchVehicle(vehicle);
-            foreach(Vehicle v in vehicles)
+            Make m;
+            while (reader.Read())
             {
-                Console.WriteLine("Id: {0}, Sold: {1}, Used: {2}, Model: {3}", v.id, v.sold, v.used, v.model);
+                m = new Make();
+
+                m.Id = Int32.Parse(reader["id"].ToString());
+                m.Name = reader["name"].ToString();
+
+                allMakes.Add(m);
             }
 
-            deleteVehicle(vehicle);
+            reader.Close();
+            return allMakes;
         }
 
+        public List<Model> GetModelByMakeId(int makeId)
+        {
+            List<Model> models = new List<Model>();
+
+            var query = "SELECT * FROM Model WHERE make=@makeId";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@makeId", makeId);
+            MySqlDataReader reader = command.ExecuteReader();
+
+            Model m;
+            while (reader.Read())
+            {
+                m = new UsedCarSales.Model();
+
+                m.Id = Int32.Parse(reader["id"].ToString());
+                m.Name = reader["name"].ToString();
+                m.MakeId = Int32.Parse(reader["make"].ToString());
+
+                models.Add(m);
+            }
+
+            reader.Close();
+            return models;
+        }
     }
 }

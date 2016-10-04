@@ -9,10 +9,10 @@ namespace UsedCarSales
     class Vehicle
     {
         //question marks mean that the variable can be set to null
-        public int id { get; set; }
-        public bool? used { get; set; }
-        public bool? sold { get; set; }
-        public int? model { get; set; }
+        public int Id { get; set; }
+        public bool? Used { get; set; }
+        public bool? Sold { get; set; }
+        public int? Model { get; set; }
 
         
 

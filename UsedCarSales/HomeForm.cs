@@ -15,10 +15,6 @@ namespace UsedCarSales
         public HomeForm()
         {
             InitializeComponent();
-
-            Database database = Database.Instance;
-            database.openConnection();
-            database.test();
         }
 
         private void Form1_Load(object sender, EventArgs e)
