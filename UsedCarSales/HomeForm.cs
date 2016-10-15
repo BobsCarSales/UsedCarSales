@@ -35,7 +35,8 @@ namespace UsedCarSales
 
         private void transactionsButton_Click(object sender, EventArgs e)
         {
-
+            SellVehicleForm sellVehicleForm = new SellVehicleForm();
+            sellVehicleForm.Show();
         }
     }
 }

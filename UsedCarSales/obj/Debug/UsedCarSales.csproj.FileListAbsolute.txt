@@ -21,3 +21,5 @@ C:\Users\Brett\Desktop\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.HomeForm
 C:\Users\Brett\Desktop\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.Properties.Resources.resources
 C:\Users\Brett\Desktop\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.VehiclesForm.resources
 C:\Users\Brett\Desktop\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.csproj.GenerateResource.Cache
+C:\Users\Brett\Desktop\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.AddCustomerForm.resources
+C:\Users\Brett\Desktop\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.AddVehicleForm.resources
