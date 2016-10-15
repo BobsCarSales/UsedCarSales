@@ -83,5 +83,11 @@ namespace UsedCarSales
             vehiclesListBox.ValueMember = "Name";
             vehiclesListBox.DataSource = vehicles;
         }
+
+        private void addVehicleButton_Click(object sender, EventArgs e)
+        {
+            AddVehicleForm addVehicleForm = new AddVehicleForm();
+            addVehicleForm.Show();
+        }
     }
 }
