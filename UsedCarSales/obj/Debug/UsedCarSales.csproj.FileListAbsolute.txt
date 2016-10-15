@@ -10,3 +10,14 @@ Y:\Development\UsedCarSales\UsedCarSales\bin\Debug\UsedCarSales.exe.config
 \\Mac\Home\Development\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.pdb
 \\Mac\Home\Development\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.HomeForm.resources
 \\Mac\Home\Development\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.VehiclesForm.resources
+C:\Users\Brett\Desktop\UsedCarSales\UsedCarSales\bin\Debug\UsedCarSales.exe.config
+C:\Users\Brett\Desktop\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.exe
+C:\Users\Brett\Desktop\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.pdb
+C:\Users\Brett\Desktop\UsedCarSales\UsedCarSales\bin\Debug\UsedCarSales.exe
+C:\Users\Brett\Desktop\UsedCarSales\UsedCarSales\bin\Debug\UsedCarSales.pdb
+C:\Users\Brett\Desktop\UsedCarSales\UsedCarSales\bin\Debug\MySql.Data.dll
+C:\Users\Brett\Desktop\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.csprojResolveAssemblyReference.cache
+C:\Users\Brett\Desktop\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.HomeForm.resources
+C:\Users\Brett\Desktop\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.Properties.Resources.resources
+C:\Users\Brett\Desktop\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.VehiclesForm.resources
+C:\Users\Brett\Desktop\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.csproj.GenerateResource.Cache

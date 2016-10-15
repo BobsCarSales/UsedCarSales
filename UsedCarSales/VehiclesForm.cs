@@ -79,6 +79,8 @@ namespace UsedCarSales
 
             vehiclesListBox.DisplayMember = "Id";
             vehiclesListBox.ValueMember = "Id";
+            vehiclesListBox.DisplayMember = "Name";
+            vehiclesListBox.ValueMember = "Name";
             vehiclesListBox.DataSource = vehicles;
         }
     }
