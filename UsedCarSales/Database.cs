@@ -240,6 +240,8 @@ namespace UsedCarSales
             command.Parameters.AddWithValue("@id", id);
             MySqlDataReader reader = command.ExecuteReader();
 
+            reader.Read();
+
             Model m = new UsedCarSales.Model();
             m.Id = reader["id"].ToString();
             m.Make = reader["make"].ToString();

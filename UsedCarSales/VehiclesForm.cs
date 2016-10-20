@@ -69,7 +69,7 @@ namespace UsedCarSales
 
             selectedModel = (Model)modelDropDownBox.SelectedItem;
             used = usedCheckBox.Checked;
-            sold = usedCheckBox.Checked;
+            sold = soldCheckBox.Checked;
 
             vehicle.Model = selectedModel;
             vehicle.Used = used;
@@ -80,9 +80,7 @@ namespace UsedCarSales
             foreach(Vehicle v in vehicles) {
                 v.Model = Database.Instance.GetModelById(v.Model.Id);
             }
-
-            vehiclesListBox.DisplayMember = "Id";
-            vehiclesListBox.ValueMember = "Id";
+            
 
             vehiclesListBox.DataSource = vehicles;
         }
