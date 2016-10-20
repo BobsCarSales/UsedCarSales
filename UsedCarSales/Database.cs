@@ -112,51 +112,25 @@ namespace UsedCarSales
         {
             var query = "SELECT * FROM Vehicle WHERE ";
 
-            //TODO: write a function to make this simpler. just trying to get it working before tuesday
-            int count = 0;
-            if (vehicle.Used != null)
+            List<String> parameters = new List<String>();
+            if(vehicle.Used != null) parameters.Add("used=@used");
+            if (vehicle.Sold != null) parameters.Add("sold=@sold");
+            if (vehicle.Model != null) parameters.Add("model=@model");
+            
+            for (int i = 0; i < parameters.Count; i++)
             {
-                //add used to the query
-                query += "used=@used";
-                count++;
-            }
-            if (vehicle.Sold != null)
-            {
-                //if we already have a WHERE clause, add an AND clause
-                if (count > 0)
-                {
-                    query += " AND ";
-                }
-
-                query += "sold=@sold";
-                count++;
-            }
-            if (vehicle.Model != null)
-            {
-                //if we already have a WHERE clause, add an AND clause
-                if (count > 0)
-                {
-                    query += " AND ";
-                }
-
-                query += "model=@model";
-                //count does not need to be incremented here unless we add another variable to search by
+                query += (parameters[i] + " ");
+                if(i < parameters.Count - 1)
+                { 
+                    query += "AND ";
+                } 
             }
 
             MySqlCommand command = new MySqlCommand(query, connection);
 
-            if (vehicle.Used != null)
-            {
-                command.Parameters.AddWithValue("@used", vehicle.Used);
-            }
-            if (vehicle.Sold != null)
-            {
-                command.Parameters.AddWithValue("@sold", vehicle.Sold);
-            }
-            if (vehicle.Model != null)
-            {
-                command.Parameters.AddWithValue("@model", vehicle.Model.Id);
-            }
+            if (vehicle.Used != null) command.Parameters.AddWithValue("@used", vehicle.Used);
+            if (vehicle.Sold != null) command.Parameters.AddWithValue("@sold", vehicle.Sold);
+            if (vehicle.Model != null) command.Parameters.AddWithValue("@model", vehicle.Model.Id);
 
             MySqlDataReader reader = command.ExecuteReader();
 
