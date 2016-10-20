@@ -23,3 +23,7 @@ C:\Users\Brett\Desktop\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.Vehicles
 C:\Users\Brett\Desktop\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.csproj.GenerateResource.Cache
 C:\Users\Brett\Desktop\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.AddCustomerForm.resources
 C:\Users\Brett\Desktop\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.AddVehicleForm.resources
+\\Mac\Home\Development\UsedCarSales\UsedCarSales\bin\Debug\EntityFramework.dll
+\\Mac\Home\Development\UsedCarSales\UsedCarSales\bin\Debug\EntityFramework.xml
+\\Mac\Home\Development\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.AddCustomerForm.resources
+\\Mac\Home\Development\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.AddVehicleForm.resources

@@ -39,9 +39,9 @@ namespace UsedCarSales
         private void LoadMakes()
         {
             List<Make> allMakes = db.GetAllMakes();
-            allMakes = allMakes.OrderBy(m => m.Name).ToList<Make>();
+            allMakes = allMakes.OrderBy(m => m.Id).ToList<Make>();
 
-            makeDropDownBox.DisplayMember = "Name";
+            makeDropDownBox.DisplayMember = "Id";
             makeDropDownBox.ValueMember = "Id";
             makeDropDownBox.DataSource = allMakes;
         }
@@ -57,7 +57,7 @@ namespace UsedCarSales
 
                 List<Model> models = db.GetModelByMakeId(selectedMake.Id);
 
-                modelDropDownBox.DisplayMember = "Name";
+                modelDropDownBox.DisplayMember = "Id";
                 modelDropDownBox.ValueMember = "Id";
                 modelDropDownBox.DataSource = models;
             }
@@ -71,16 +71,19 @@ namespace UsedCarSales
             used = usedCheckBox.Checked;
             sold = usedCheckBox.Checked;
 
-            vehicle.Model = selectedModel.Id;
+            vehicle.Model = selectedModel;
             vehicle.Used = used;
             vehicle.Sold = sold;
 
             List<Vehicle> vehicles = db.searchVehicle(vehicle);
 
+            foreach(Vehicle v in vehicles) {
+                v.Model = Database.Instance.GetModelById(v.Model.Id);
+            }
+
             vehiclesListBox.DisplayMember = "Id";
             vehiclesListBox.ValueMember = "Id";
-            vehiclesListBox.DisplayMember = "Name";
-            vehiclesListBox.ValueMember = "Name";
+
             vehiclesListBox.DataSource = vehicles;
         }
 

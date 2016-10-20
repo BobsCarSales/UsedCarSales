@@ -8,8 +8,7 @@ namespace UsedCarSales
 {
     public class Model
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int MakeId { get; set; }
+        public string Id { get; set; }
+        public string Make { get; set; }
     }
 }

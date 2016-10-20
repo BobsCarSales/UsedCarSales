@@ -155,7 +155,7 @@ namespace UsedCarSales
             }
             if (vehicle.Model != null)
             {
-                command.Parameters.AddWithValue("@model", vehicle.Model);
+                command.Parameters.AddWithValue("@model", vehicle.Model.Id);
             }
 
             MySqlDataReader reader = command.ExecuteReader();
@@ -171,7 +171,11 @@ namespace UsedCarSales
                 v.Id = Int32.Parse(reader["id"].ToString());
                 v.Used = Boolean.Parse(reader["used"].ToString());
                 v.Sold = Boolean.Parse(reader["sold"].ToString());
-                v.Model = Int32.Parse(reader["model"].ToString());
+
+                //get the id from the model in case we want to load the entire model later on
+                Model model = new Model();
+                model.Id = reader["model"].ToString();
+                v.Model = model;
 
                 vehicles.Add(v);
             }
@@ -196,8 +200,7 @@ namespace UsedCarSales
             {
                 m = new Make();
 
-                m.Id = Int32.Parse(reader["id"].ToString());
-                m.Name = reader["name"].ToString();
+                m.Id = reader["id"].ToString();
 
                 allMakes.Add(m);
             }
@@ -206,7 +209,7 @@ namespace UsedCarSales
             return allMakes;
         }
 
-        public List<Model> GetModelByMakeId(int makeId)
+        public List<Model> GetModelByMakeId(String makeId)
         {
             List<Model> models = new List<Model>();
 
@@ -220,15 +223,29 @@ namespace UsedCarSales
             {
                 m = new UsedCarSales.Model();
 
-                m.Id = Int32.Parse(reader["id"].ToString());
-                m.Name = reader["name"].ToString();
-                m.MakeId = Int32.Parse(reader["make"].ToString());
+                m.Id = reader["id"].ToString();
+                m.Make = reader["make"].ToString();
 
                 models.Add(m);
             }
 
             reader.Close();
             return models;
+        }
+
+        public Model GetModelById(String id)
+        {
+            var query = "SELECT * FROM Model WHERE id=@id";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@id", id);
+            MySqlDataReader reader = command.ExecuteReader();
+
+            Model m = new UsedCarSales.Model();
+            m.Id = reader["id"].ToString();
+            m.Make = reader["make"].ToString();
+
+            reader.Close();
+            return m;
         }
     }
 }
