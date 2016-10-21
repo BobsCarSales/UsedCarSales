@@ -1,6 +1,6 @@
 ﻿namespace UsedCarSales
 {
-    partial class AddVehicleForm
+    partial class AddEditVehicleForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,20 +31,21 @@
             this.usedCheckBox = new System.Windows.Forms.CheckBox();
             this.makeLabel = new System.Windows.Forms.Label();
             this.modelLabel = new System.Windows.Forms.Label();
-            this.makeTextBox = new System.Windows.Forms.TextBox();
-            this.modelTextBox = new System.Windows.Forms.TextBox();
             this.confirmButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.soldCheckBox = new System.Windows.Forms.CheckBox();
+            this.makeDropDown = new System.Windows.Forms.ComboBox();
+            this.modelDropDown = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // usedCheckBox
             // 
             this.usedCheckBox.AutoSize = true;
             this.usedCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.usedCheckBox.Location = new System.Drawing.Point(181, 19);
-            this.usedCheckBox.Margin = new System.Windows.Forms.Padding(2);
+            this.usedCheckBox.Location = new System.Drawing.Point(220, 22);
+            this.usedCheckBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.usedCheckBox.Name = "usedCheckBox";
-            this.usedCheckBox.Size = new System.Drawing.Size(51, 17);
+            this.usedCheckBox.Size = new System.Drawing.Size(63, 21);
             this.usedCheckBox.TabIndex = 8;
             this.usedCheckBox.Text = "Used";
             this.usedCheckBox.UseVisualStyleBackColor = true;
@@ -52,68 +53,85 @@
             // makeLabel
             // 
             this.makeLabel.AutoSize = true;
-            this.makeLabel.Location = new System.Drawing.Point(11, 19);
-            this.makeLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.makeLabel.Location = new System.Drawing.Point(15, 23);
             this.makeLabel.Name = "makeLabel";
-            this.makeLabel.Size = new System.Drawing.Size(34, 13);
+            this.makeLabel.Size = new System.Drawing.Size(42, 17);
             this.makeLabel.TabIndex = 9;
             this.makeLabel.Text = "Make";
             // 
             // modelLabel
             // 
             this.modelLabel.AutoSize = true;
-            this.modelLabel.Location = new System.Drawing.Point(9, 49);
-            this.modelLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.modelLabel.Location = new System.Drawing.Point(12, 60);
             this.modelLabel.Name = "modelLabel";
-            this.modelLabel.Size = new System.Drawing.Size(36, 13);
+            this.modelLabel.Size = new System.Drawing.Size(46, 17);
             this.modelLabel.TabIndex = 10;
             this.modelLabel.Text = "Model";
             // 
-            // makeTextBox
-            // 
-            this.makeTextBox.Location = new System.Drawing.Point(50, 19);
-            this.makeTextBox.Name = "makeTextBox";
-            this.makeTextBox.Size = new System.Drawing.Size(100, 20);
-            this.makeTextBox.TabIndex = 11;
-            // 
-            // modelTextBox
-            // 
-            this.modelTextBox.Location = new System.Drawing.Point(50, 49);
-            this.modelTextBox.Name = "modelTextBox";
-            this.modelTextBox.Size = new System.Drawing.Size(100, 20);
-            this.modelTextBox.TabIndex = 12;
-            // 
             // confirmButton
             // 
-            this.confirmButton.Location = new System.Drawing.Point(50, 122);
+            this.confirmButton.Location = new System.Drawing.Point(30, 105);
+            this.confirmButton.Margin = new System.Windows.Forms.Padding(4);
             this.confirmButton.Name = "confirmButton";
-            this.confirmButton.Size = new System.Drawing.Size(75, 23);
+            this.confirmButton.Size = new System.Drawing.Size(100, 28);
             this.confirmButton.TabIndex = 13;
             this.confirmButton.Text = "Confirm";
             this.confirmButton.UseVisualStyleBackColor = true;
+            this.confirmButton.Click += new System.EventHandler(this.confirmButton_Click);
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(157, 122);
+            this.cancelButton.Location = new System.Drawing.Point(172, 105);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(4);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.Size = new System.Drawing.Size(100, 28);
             this.cancelButton.TabIndex = 14;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
-            // AddVehicleForm
+            // soldCheckBox
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.soldCheckBox.AutoSize = true;
+            this.soldCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.soldCheckBox.Location = new System.Drawing.Point(225, 48);
+            this.soldCheckBox.Name = "soldCheckBox";
+            this.soldCheckBox.Size = new System.Drawing.Size(58, 21);
+            this.soldCheckBox.TabIndex = 16;
+            this.soldCheckBox.Text = "Sold";
+            this.soldCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // makeDropDown
+            // 
+            this.makeDropDown.FormattingEnabled = true;
+            this.makeDropDown.Location = new System.Drawing.Point(67, 23);
+            this.makeDropDown.Name = "makeDropDown";
+            this.makeDropDown.Size = new System.Drawing.Size(147, 24);
+            this.makeDropDown.TabIndex = 17;
+            // 
+            // modelDropDown
+            // 
+            this.modelDropDown.FormattingEnabled = true;
+            this.modelDropDown.Location = new System.Drawing.Point(67, 60);
+            this.modelDropDown.Name = "modelDropDown";
+            this.modelDropDown.Size = new System.Drawing.Size(147, 24);
+            this.modelDropDown.TabIndex = 18;
+            // 
+            // AddEditVehicleForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 179);
+            this.ClientSize = new System.Drawing.Size(305, 155);
+            this.Controls.Add(this.modelDropDown);
+            this.Controls.Add(this.makeDropDown);
+            this.Controls.Add(this.soldCheckBox);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.confirmButton);
-            this.Controls.Add(this.modelTextBox);
-            this.Controls.Add(this.makeTextBox);
             this.Controls.Add(this.modelLabel);
             this.Controls.Add(this.makeLabel);
             this.Controls.Add(this.usedCheckBox);
-            this.Name = "AddVehicleForm";
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "AddEditVehicleForm";
             this.Text = "AddVehicleForm";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -125,9 +143,10 @@
         private System.Windows.Forms.CheckBox usedCheckBox;
         private System.Windows.Forms.Label makeLabel;
         private System.Windows.Forms.Label modelLabel;
-        private System.Windows.Forms.TextBox makeTextBox;
-        private System.Windows.Forms.TextBox modelTextBox;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button confirmButton;
+        private System.Windows.Forms.CheckBox soldCheckBox;
+        private System.Windows.Forms.ComboBox makeDropDown;
+        private System.Windows.Forms.ComboBox modelDropDown;
     }
 }

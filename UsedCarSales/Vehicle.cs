@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UsedCarSales
 {
-    class Vehicle
+    public class Vehicle
     {
         //question marks mean that the variable can be set to null
         public int Id { get; set; }
