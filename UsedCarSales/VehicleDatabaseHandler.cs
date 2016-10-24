@@ -24,6 +24,7 @@ namespace UsedCarSales
             }
         }
 
+        //TODO: need exception handling
         public void addVehicle(Vehicle vehicle)
         {
             //don't insert the ID here because it should automatically happen
@@ -41,6 +42,7 @@ namespace UsedCarSales
             Console.WriteLine("New vehicle added succesfully");
         }
 
+        //TODO: need exception handling
         public void editVehicle(Vehicle vehicle)
         {
             var query = "UPDATE Vehicle SET used=@used, sold=@sold, model=@model WHERE id=@id";
@@ -58,17 +60,29 @@ namespace UsedCarSales
             Console.WriteLine("Vehicle {0} edited successfully", vehicle.Id);
         }
 
-        public void deleteVehicle(Vehicle vehicle)
+        public bool deleteVehicle(Vehicle vehicle)
         {
             var query = "DELETE FROM Vehicle WHERE id=@id";
 
             MySqlCommand command = new MySqlCommand(query, DatabaseConnection.Instance.connection);
 
-            command.Parameters.AddWithValue("@id", vehicle.Id);
+            try
+            {
+                command.Parameters.AddWithValue("@id", vehicle.Id);
+                command.ExecuteNonQuery();
+            } catch (Exception e)
+            {
+                Console.WriteLine("Error deleting vehicle");
+                Console.WriteLine(e);
+                return false;
+            }
 
             Console.WriteLine("Vehicle {0} deleted successfully", vehicle.Id);
+
+            return true;
         }
 
+        //TODO: need exception handling
         public List<Vehicle> searchVehicle(Vehicle vehicle)
         {
             var query = "SELECT * FROM Vehicle WHERE ";

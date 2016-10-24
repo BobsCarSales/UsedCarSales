@@ -155,6 +155,7 @@
             this.removeVehicle.TabIndex = 12;
             this.removeVehicle.Text = "Remove Vehicle";
             this.removeVehicle.UseVisualStyleBackColor = true;
+            this.removeVehicle.Click += new System.EventHandler(this.removeVehicle_Click);
             // 
             // vehiclesListBox
             // 

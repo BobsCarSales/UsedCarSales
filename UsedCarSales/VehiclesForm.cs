@@ -19,6 +19,8 @@ namespace UsedCarSales
         VehicleDatabaseHandler vehicleDatabaseHandler = VehicleDatabaseHandler.Instance;
         ModelDatabaseHandler modelDatabaseHandler = ModelDatabaseHandler.Instance;
 
+        List<Vehicle> vehicles = new List<Vehicle>();
+
         public VehiclesForm()
         {
             InitializeComponent();
@@ -105,9 +107,10 @@ namespace UsedCarSales
             vehicle.Used = usedCheckBox.Checked;
             vehicle.Sold = soldCheckBox.Checked;
 
-            List<Vehicle> vehicles = vehicleDatabaseHandler.searchVehicle(vehicle);
+            vehicles = vehicleDatabaseHandler.searchVehicle(vehicle);
 
-            foreach(Vehicle v in vehicles) {
+            foreach (Vehicle v in vehicles)
+            {
                 v.Model = modelDatabaseHandler.GetModelById(v.Model.Id);
             }
 
@@ -126,6 +129,27 @@ namespace UsedCarSales
             {
                 AddEditVehicleForm editVehicleForm = new AddEditVehicleForm((Vehicle)vehiclesListBox.SelectedItem, EDIT_VEHICLE, getMakesList());
                 editVehicleForm.Show();
+            }
+        }
+
+        private void removeVehicle_Click(object sender, EventArgs e)
+        {
+            var confirmResult = MessageBox.Show("Are you sure to delete this vehicle?",
+                                     "Confirm Deletion of Vehicle",
+                                     MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                bool success = vehicleDatabaseHandler.deleteVehicle((Vehicle) vehiclesListBox.SelectedItem);
+
+                if(success)
+                {
+                    Console.WriteLine("Vehicle successfully deleted");
+
+                    Vehicle deletedVehicle = (Vehicle) vehiclesListBox.SelectedItem;
+                    vehicles.Remove(deletedVehicle);
+                    vehiclesListBox.DataSource = null;
+                    vehiclesListBox.DataSource = vehicles;
+                }
             }
         }
     }
