@@ -100,6 +100,12 @@
     <Compile Include="VehiclesForm.Designer.cs">
       <DependentUpon>VehiclesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewVehicleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewVehicleForm.Designer.cs">
+      <DependentUpon>ViewVehicleForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AddCustomerForm.resx">
       <DependentUpon>AddCustomerForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -120,6 +126,9 @@
     </Compile>
     <EmbeddedResource Include="VehiclesForm.resx">
       <DependentUpon>VehiclesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewVehicleForm.resx">
+      <DependentUpon>ViewVehicleForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

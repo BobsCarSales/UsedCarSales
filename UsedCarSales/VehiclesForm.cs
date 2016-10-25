@@ -125,6 +125,7 @@ namespace UsedCarSales
 
         private void editVehicleButton_Click(object sender, EventArgs e)
         {
+            //TODO: editVehicle button should be disabled when selecteditem is null;
             if(vehiclesListBox.SelectedItem != null)
             {
                 AddEditVehicleForm editVehicleForm = new AddEditVehicleForm((Vehicle)vehiclesListBox.SelectedItem, EDIT_VEHICLE, getMakesList());
@@ -150,6 +151,16 @@ namespace UsedCarSales
                     vehiclesListBox.DataSource = null;
                     vehiclesListBox.DataSource = vehicles;
                 }
+            }
+        }
+
+        private void viewVehicleButton_Click(object sender, EventArgs e)
+        {
+            //TODO: viewVehicle button should be disabled when selecteditem is null;
+            if (vehiclesListBox.SelectedItem != null)
+            {
+                ViewVehicleForm viewVehicleForm = new ViewVehicleForm((Vehicle)vehiclesListBox.SelectedItem);
+                viewVehicleForm.Show();
             }
         }
     }

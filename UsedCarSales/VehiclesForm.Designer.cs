@@ -134,6 +134,7 @@
             this.viewVehicleButton.TabIndex = 10;
             this.viewVehicleButton.Text = "View Vehicle";
             this.viewVehicleButton.UseVisualStyleBackColor = true;
+            this.viewVehicleButton.Click += new System.EventHandler(this.viewVehicleButton_Click);
             // 
             // editVehicleButton
             // 

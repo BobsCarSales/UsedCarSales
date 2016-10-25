@@ -27,3 +27,4 @@ C:\Users\Brett\Desktop\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.AddVehic
 \\Mac\Home\Development\UsedCarSales\UsedCarSales\bin\Debug\EntityFramework.xml
 \\Mac\Home\Development\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.AddCustomerForm.resources
 \\Mac\Home\Development\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.AddEditVehicleForm.resources
+\\Mac\Home\Development\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.ViewVehicleForm.resources
