@@ -36,6 +36,8 @@
             this.soldCheckBox = new System.Windows.Forms.CheckBox();
             this.makeDropDown = new System.Windows.Forms.ComboBox();
             this.modelDropDown = new System.Windows.Forms.ComboBox();
+            this.yearLabel = new System.Windows.Forms.Label();
+            this.yearTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // usedCheckBox
@@ -70,7 +72,7 @@
             // 
             // confirmButton
             // 
-            this.confirmButton.Location = new System.Drawing.Point(30, 105);
+            this.confirmButton.Location = new System.Drawing.Point(29, 136);
             this.confirmButton.Margin = new System.Windows.Forms.Padding(4);
             this.confirmButton.Name = "confirmButton";
             this.confirmButton.Size = new System.Drawing.Size(100, 28);
@@ -81,7 +83,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(172, 105);
+            this.cancelButton.Location = new System.Drawing.Point(171, 136);
             this.cancelButton.Margin = new System.Windows.Forms.Padding(4);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(100, 28);
@@ -117,11 +119,29 @@
             this.modelDropDown.Size = new System.Drawing.Size(147, 24);
             this.modelDropDown.TabIndex = 18;
             // 
+            // yearLabel
+            // 
+            this.yearLabel.AutoSize = true;
+            this.yearLabel.Location = new System.Drawing.Point(13, 95);
+            this.yearLabel.Name = "yearLabel";
+            this.yearLabel.Size = new System.Drawing.Size(38, 17);
+            this.yearLabel.TabIndex = 19;
+            this.yearLabel.Text = "Year";
+            // 
+            // yearTextBox
+            // 
+            this.yearTextBox.Location = new System.Drawing.Point(67, 95);
+            this.yearTextBox.Name = "yearTextBox";
+            this.yearTextBox.Size = new System.Drawing.Size(147, 22);
+            this.yearTextBox.TabIndex = 20;
+            // 
             // AddEditVehicleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(305, 155);
+            this.ClientSize = new System.Drawing.Size(305, 181);
+            this.Controls.Add(this.yearTextBox);
+            this.Controls.Add(this.yearLabel);
             this.Controls.Add(this.modelDropDown);
             this.Controls.Add(this.makeDropDown);
             this.Controls.Add(this.soldCheckBox);
@@ -148,5 +168,7 @@
         private System.Windows.Forms.CheckBox soldCheckBox;
         private System.Windows.Forms.ComboBox makeDropDown;
         private System.Windows.Forms.ComboBox modelDropDown;
+        private System.Windows.Forms.Label yearLabel;
+        private System.Windows.Forms.TextBox yearTextBox;
     }
 }

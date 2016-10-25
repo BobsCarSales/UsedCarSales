@@ -15,8 +15,8 @@ namespace UsedCarSales
         public const int ADD_VEHICLE = 0;
         public const int EDIT_VEHICLE = 1;
 
-        MakeDatabaseHandler makeDatabaseHandler = MakeDatabaseHandler.Instance;
-        VehicleDatabaseHandler vehicleDatabaseHandler = VehicleDatabaseHandler.Instance;
+        MakeDataAccess makeDatabaseHandler = MakeDataAccess.Instance;
+        VehicleDataAccess vehicleDatabaseHandler = VehicleDataAccess.Instance;
         ModelDatabaseHandler modelDatabaseHandler = ModelDatabaseHandler.Instance;
 
         List<Vehicle> vehicles = new List<Vehicle>();
@@ -130,6 +130,9 @@ namespace UsedCarSales
             {
                 AddEditVehicleForm editVehicleForm = new AddEditVehicleForm((Vehicle)vehiclesListBox.SelectedItem, EDIT_VEHICLE, getMakesList());
                 editVehicleForm.Show();
+
+                //reset the list of vehicles so old data doesn't hang out after we edit it
+                vehiclesListBox.DataSource = null;
             }
         }
 

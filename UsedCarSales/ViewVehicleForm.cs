@@ -22,7 +22,7 @@ namespace UsedCarSales
         {
             makeValueLabel.Text = vehicle.Model.Make;
             modelValueLabel.Text = vehicle.Model.Id;
-            yearValueLabel.Text = null;
+            yearValueLabel.Text = vehicle.Year.ToString();
             usedValueLabel.Text = vehicle.Used.ToString();
             soldValueLabel.Text = vehicle.Sold.ToString();
         }

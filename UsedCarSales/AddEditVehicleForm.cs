@@ -45,6 +45,7 @@ namespace UsedCarSales
                 if (CurrentVehicle.Model.Id != null) modelDropDown.SelectedItem = CurrentVehicle.Model.Id;
                 if (CurrentVehicle.Used != null) usedCheckBox.Checked = (bool) CurrentVehicle.Used;
                 if (CurrentVehicle.Sold != null) soldCheckBox.Checked = (bool) CurrentVehicle.Sold;
+                if (CurrentVehicle.Year != null) yearTextBox.Text = CurrentVehicle.Year.ToString();
             }
         }
 
@@ -56,6 +57,7 @@ namespace UsedCarSales
                 vehicle.Model = (Model)modelDropDown.SelectedItem;
                 vehicle.Sold = soldCheckBox.Checked;
                 vehicle.Used = usedCheckBox.Checked;
+                vehicle.Year = Int32.Parse(yearTextBox.Text);
 
                 vehicleDatabaseHandler.addVehicle(vehicle);
             }
@@ -64,6 +66,7 @@ namespace UsedCarSales
                 CurrentVehicle.Model = (Model)modelDropDown.SelectedItem;
                 CurrentVehicle.Sold = soldCheckBox.Checked;
                 CurrentVehicle.Used = usedCheckBox.Checked;
+                CurrentVehicle.Year = Int32.Parse(yearTextBox.Text);
 
                 vehicleDatabaseHandler.editVehicle(CurrentVehicle);
             }

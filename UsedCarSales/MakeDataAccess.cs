@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace UsedCarSales
 {
-    class MakeDatabaseHandler
+    class MakeDataAccess
     {
-        private static MakeDatabaseHandler instance { get; set; }
+        private static MakeDataAccess instance { get; set; }
         
-        public static MakeDatabaseHandler Instance
+        public static MakeDataAccess Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new MakeDatabaseHandler();
+                    instance = new MakeDataAccess();
                 }
 
                 return instance;

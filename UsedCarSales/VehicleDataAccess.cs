@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace UsedCarSales
 {
-    class VehicleDatabaseHandler
+    class VehicleDataAccess
     {
-        private static VehicleDatabaseHandler instance { get; set; }
+        private static VehicleDataAccess instance { get; set; }
 
-        public static VehicleDatabaseHandler Instance
+        public static VehicleDataAccess Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new VehicleDatabaseHandler();
+                    instance = new VehicleDataAccess();
                 }
 
                 return instance;
@@ -28,7 +28,7 @@ namespace UsedCarSales
         public void addVehicle(Vehicle vehicle)
         {
             //don't insert the ID here because it should automatically happen
-            var query = "INSERT INTO Vehicle (used, sold, model) VALUES (@used, @sold, @model)";
+            var query = "INSERT INTO Vehicle (used, sold, model, year) VALUES (@used, @sold, @model, @year)";
 
             MySqlCommand command = new MySqlCommand(query, DatabaseConnection.Instance.connection);
 
@@ -36,6 +36,7 @@ namespace UsedCarSales
             command.Parameters.AddWithValue("@used", vehicle.Used);
             command.Parameters.AddWithValue("@sold", vehicle.Sold);
             command.Parameters.AddWithValue("@model", vehicle.Model.Id);
+            command.Parameters.AddWithValue("@year", vehicle.Year);
             command.ExecuteNonQuery();
 
             //TODO: print vehicle information for debugging
@@ -45,7 +46,7 @@ namespace UsedCarSales
         //TODO: need exception handling
         public void editVehicle(Vehicle vehicle)
         {
-            var query = "UPDATE Vehicle SET used=@used, sold=@sold, model=@model WHERE id=@id";
+            var query = "UPDATE Vehicle SET used=@used, sold=@sold, model=@model, year=@year WHERE id=@id";
 
             MySqlCommand command = new MySqlCommand(query, DatabaseConnection.Instance.connection);
 
@@ -55,6 +56,7 @@ namespace UsedCarSales
             command.Parameters.AddWithValue("@used", vehicle.Used);
             command.Parameters.AddWithValue("@sold", vehicle.Sold);
             command.Parameters.AddWithValue("@model", vehicle.Model.Id);
+            command.Parameters.AddWithValue("@year", vehicle.Year);
             command.ExecuteNonQuery();
 
             Console.WriteLine("Vehicle {0} edited successfully", vehicle.Id);
@@ -91,6 +93,7 @@ namespace UsedCarSales
             if (vehicle.Used != null) parameters.Add("used=@used");
             if (vehicle.Sold != null) parameters.Add("sold=@sold");
             if (vehicle.Model != null) parameters.Add("model=@model");
+            if (vehicle.Year != null) parameters.Add("year=@year");
 
             for (int i = 0; i < parameters.Count; i++)
             {
@@ -106,6 +109,7 @@ namespace UsedCarSales
             if (vehicle.Used != null) command.Parameters.AddWithValue("@used", vehicle.Used);
             if (vehicle.Sold != null) command.Parameters.AddWithValue("@sold", vehicle.Sold);
             if (vehicle.Model != null) command.Parameters.AddWithValue("@model", vehicle.Model.Id);
+            if (vehicle.Year != null) command.Parameters.AddWithValue("@year", vehicle.Year);
 
             MySqlDataReader reader = command.ExecuteReader();
 
@@ -120,6 +124,7 @@ namespace UsedCarSales
                 v.Id = Int32.Parse(reader["id"].ToString());
                 v.Used = Boolean.Parse(reader["used"].ToString());
                 v.Sold = Boolean.Parse(reader["sold"].ToString());
+                v.Year = Int32.Parse(reader["year"].ToString());
 
                 //get the id from the model in case we want to load the entire model later on
                 Model model = new Model();

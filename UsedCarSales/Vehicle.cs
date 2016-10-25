@@ -17,7 +17,7 @@ namespace UsedCarSales
 
         public override string ToString()
         {
-            return (Id.ToString() + " - " + Model.Make + " " + Model.Id);
+            return (Year.ToString() + " " + Model.Make + " " + Model.Id);
         }
 
     }
