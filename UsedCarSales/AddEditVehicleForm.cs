@@ -9,8 +9,8 @@ namespace UsedCarSales
         public const int ADD_VEHICLE = 0;
         public const int EDIT_VEHICLE = 1;
 
-        ModelDatabaseHandler modelDatabaseHandler = ModelDatabaseHandler.Instance;
-        VehicleDatabaseHandler vehicleDatabaseHandler = VehicleDatabaseHandler.Instance;
+        ModelDataAccess modelDatabaseHandler = ModelDataAccess.Instance;
+        VehicleDataAccess vehicleDatabaseHandler = VehicleDataAccess.Instance;
 
         Vehicle CurrentVehicle { get; set; }
         int mode;

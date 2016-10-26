@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace UsedCarSales
 {
-    class ModelDatabaseHandler
+    class ModelDataAccess
     {
-        private static ModelDatabaseHandler instance { get; set; }
+        private static ModelDataAccess instance { get; set; }
         
-        public static ModelDatabaseHandler Instance
+        public static ModelDataAccess Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new ModelDatabaseHandler();
+                    instance = new ModelDataAccess();
                 }
 
                 return instance;

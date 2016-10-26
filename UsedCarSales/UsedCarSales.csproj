@@ -80,11 +80,12 @@
       <DependentUpon>HomeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Make.cs" />
-    <Compile Include="MakeDatabaseHandler.cs" />
+    <Compile Include="MakeDataAccess.cs" />
     <Compile Include="Model.cs" />
-    <Compile Include="ModelDatabaseHandler.cs" />
+    <Compile Include="ModelDataAccess.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Promotion.cs" />
+    <Compile Include="PromotionDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SellVehicleForm.cs">
       <SubType>Form</SubType>
@@ -93,7 +94,7 @@
       <DependentUpon>SellVehicleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Vehicle.cs" />
-    <Compile Include="VehicleDatabaseHandler.cs" />
+    <Compile Include="VehicleDataAccess.cs" />
     <Compile Include="VehiclesForm.cs">
       <SubType>Form</SubType>
     </Compile>

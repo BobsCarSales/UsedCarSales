@@ -17,7 +17,7 @@ namespace UsedCarSales
 
         MakeDataAccess makeDatabaseHandler = MakeDataAccess.Instance;
         VehicleDataAccess vehicleDatabaseHandler = VehicleDataAccess.Instance;
-        ModelDatabaseHandler modelDatabaseHandler = ModelDatabaseHandler.Instance;
+        ModelDataAccess modelDatabaseHandler = ModelDataAccess.Instance;
 
         List<Vehicle> vehicles = new List<Vehicle>();
 
