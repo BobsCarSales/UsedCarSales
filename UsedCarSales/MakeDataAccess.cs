@@ -37,7 +37,7 @@ namespace UsedCarSales
             {
                 m = new Make();
 
-                m.Id = reader["id"].ToString();
+                //m.Id = reader["id"].ToString();
 
                 allMakes.Add(m);
             }

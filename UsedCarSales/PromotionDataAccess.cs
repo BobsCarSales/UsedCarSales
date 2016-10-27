@@ -37,7 +37,7 @@ namespace UsedCarSales
             {
                 p = new Promotion();
 
-                p.Id = Int32.Parse(reader["id"].ToString());
+                //p.Id = Int32.Parse(reader["id"].ToString());
 
                 allPromotions.Add(p);
             }
@@ -54,7 +54,7 @@ namespace UsedCarSales
             MySqlCommand command = new MySqlCommand(query, DatabaseConnection.Instance.connection);
 
             //add vehicle values to command to be executed by the database
-            command.Parameters.AddWithValue("@discountAmount", promotion.DiscountAmount);
+            //command.Parameters.AddWithValue("@discountAmount", promotion.DiscountAmount);
             command.Parameters.AddWithValue("@sold", promotion.Make);
             command.ExecuteNonQuery();
 
@@ -69,13 +69,13 @@ namespace UsedCarSales
             MySqlCommand command = new MySqlCommand(query, DatabaseConnection.Instance.connection);
 
             //need the ID to edit the specific vehicle
-            command.Parameters.AddWithValue("@id", promotion.Id);
+            //command.Parameters.AddWithValue("@id", promotion.Id);
 
-            command.Parameters.AddWithValue("@discountAmount", promotion.DiscountAmount);
+           // command.Parameters.AddWithValue("@discountAmount", promotion.DiscountAmount);
             command.Parameters.AddWithValue("@make", promotion.Make);
             command.ExecuteNonQuery();
 
-            Console.WriteLine("Promotion {0} edited successfully", promotion.Id);
+            //Console.WriteLine("Promotion {0} edited successfully", promotion.Id);
         }
 
         public bool deletePromotion(Promotion promotion)
@@ -86,7 +86,7 @@ namespace UsedCarSales
 
             try
             {
-                command.Parameters.AddWithValue("@id", promotion.Id);
+                //command.Parameters.AddWithValue("@id", promotion.Id);
                 command.ExecuteNonQuery();
             }
             catch (Exception e)
@@ -96,7 +96,7 @@ namespace UsedCarSales
                 return false;
             }
 
-            Console.WriteLine("Promotion {0} deleted successfully", promotion.Id);
+            //Console.WriteLine("Promotion {0} deleted successfully", promotion.Id);
 
             return true;
         }

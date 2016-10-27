@@ -42,10 +42,10 @@ namespace UsedCarSales
             if (CurrentVehicle != null)
             {
                 if (CurrentVehicle.Model.Make != null) makeDropDown.SelectedItem = CurrentVehicle.Model.Make;
-                if (CurrentVehicle.Model.Id != null) modelDropDown.SelectedItem = CurrentVehicle.Model.Id;
-                if (CurrentVehicle.Used != null) usedCheckBox.Checked = (bool) CurrentVehicle.Used;
-                if (CurrentVehicle.Sold != null) soldCheckBox.Checked = (bool) CurrentVehicle.Sold;
-                if (CurrentVehicle.Year != null) yearTextBox.Text = CurrentVehicle.Year.ToString();
+                //if (CurrentVehicle.Model.Id != null) modelDropDown.SelectedItem = CurrentVehicle.Model.Id;
+                //if (CurrentVehicle.Used != null) usedCheckBox.Checked = (bool) CurrentVehicle.Used;
+                //if (CurrentVehicle.Sold != null) soldCheckBox.Checked = (bool) CurrentVehicle.Sold;
+                //if (CurrentVehicle.Year != null) yearTextBox.Text = CurrentVehicle.Year.ToString();
             }
         }
 
@@ -55,18 +55,18 @@ namespace UsedCarSales
             {
                 Vehicle vehicle = new Vehicle();
                 vehicle.Model = (Model)modelDropDown.SelectedItem;
-                vehicle.Sold = soldCheckBox.Checked;
-                vehicle.Used = usedCheckBox.Checked;
-                vehicle.Year = Int32.Parse(yearTextBox.Text);
+               // vehicle.Sold = soldCheckBox.Checked;
+                //vehicle.Used = usedCheckBox.Checked;
+                //vehicle.Year = Int32.Parse(yearTextBox.Text);
 
                 vehicleDatabaseHandler.addVehicle(vehicle);
             }
             else if(mode == EDIT_VEHICLE)
             {
                 CurrentVehicle.Model = (Model)modelDropDown.SelectedItem;
-                CurrentVehicle.Sold = soldCheckBox.Checked;
-                CurrentVehicle.Used = usedCheckBox.Checked;
-                CurrentVehicle.Year = Int32.Parse(yearTextBox.Text);
+                //CurrentVehicle.Sold = soldCheckBox.Checked;
+               // CurrentVehicle.Used = usedCheckBox.Checked;
+                //CurrentVehicle.Year = Int32.Parse(yearTextBox.Text);
 
                 vehicleDatabaseHandler.editVehicle(CurrentVehicle);
             }
@@ -80,11 +80,11 @@ namespace UsedCarSales
         {
             if (makeDropDown.SelectedItem != null)
             {
-                List<Model> models = modelDatabaseHandler.GetModelByMakeId( ((Make)makeDropDown.SelectedItem).Id);
+               // List<Model> models = modelDatabaseHandler.GetModelByMakeId( ((Make)makeDropDown.SelectedItem).Id);
 
                 modelDropDown.DisplayMember = "Id";
                 modelDropDown.ValueMember = "Id";
-                modelDropDown.DataSource = models;
+                //modelDropDown.DataSource = models;
             }
         }
 

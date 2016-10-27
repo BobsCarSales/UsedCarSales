@@ -45,8 +45,9 @@ namespace UsedCarSales
         //will only be called once when the VehiclesFrom loads
         private void loadMakes()
         {
-            List<Make> allMakes = makeDatabaseHandler.GetAllMakes();
-            allMakes = allMakes.OrderBy(m => m.Id).ToList<Make>();
+            csc440GroupProjectEntities1 db = new csc440GroupProjectEntities1();
+            List<Make> allMakes = db.Makes.ToList();
+            //allMakes = allMakes.OrderBy(m => m.Id).ToList<Make>();
 
             makeDropDownBox.DisplayMember = "Id";
             makeDropDownBox.ValueMember = "Id";
@@ -60,11 +61,11 @@ namespace UsedCarSales
             if(makeDropDownBox.SelectedItem != null)
             {
 
-                List<Model> models = modelDatabaseHandler.GetModelByMakeId( ((Make)makeDropDownBox.SelectedItem).Id);
+                //List<Model> models = modelDatabaseHandler.GetModelByMakeId( ((Make)makeDropDownBox.SelectedItem).Id);
 
                 modelDropDownBox.DisplayMember = "Id";
                 modelDropDownBox.ValueMember = "Id";
-                modelDropDownBox.DataSource = models;
+               // modelDropDownBox.DataSource = models;
             }
         }
 
@@ -104,14 +105,14 @@ namespace UsedCarSales
             Vehicle vehicle = new Vehicle();
 
             vehicle.Model = (Model)modelDropDownBox.SelectedItem;
-            vehicle.Used = usedCheckBox.Checked;
-            vehicle.Sold = soldCheckBox.Checked;
+            //vehicle.Used = usedCheckBox.Checked;
+            //vehicle.Sold = soldCheckBox.Checked;
 
             vehicles = vehicleDatabaseHandler.searchVehicle(vehicle);
 
             foreach (Vehicle v in vehicles)
             {
-                v.Model = modelDatabaseHandler.GetModelById(v.Model.Id);
+               // v.Model = modelDatabaseHandler.GetModelById(v.Model.Id);
             }
 
             vehiclesListBox.DataSource = vehicles;

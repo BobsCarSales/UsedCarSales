@@ -38,8 +38,8 @@ namespace UsedCarSales
             {
                 m = new UsedCarSales.Model();
 
-                m.Id = reader["id"].ToString();
-                m.Make = reader["make"].ToString();
+                //m.Id = reader["id"].ToString();
+               // m.Make = reader["make"].ToString();
 
                 models.Add(m);
             }
@@ -58,8 +58,8 @@ namespace UsedCarSales
             reader.Read();
 
             Model m = new UsedCarSales.Model();
-            m.Id = reader["id"].ToString();
-            m.Make = reader["make"].ToString();
+          //  m.Id = reader["id"].ToString();
+           // m.Make = reader["make"].ToString();
 
             reader.Close();
             return m;

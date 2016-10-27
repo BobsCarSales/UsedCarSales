@@ -33,10 +33,10 @@ namespace UsedCarSales
             MySqlCommand command = new MySqlCommand(query, DatabaseConnection.Instance.connection);
 
             //add vehicle values to command to be executed by the database
-            command.Parameters.AddWithValue("@used", vehicle.Used);
-            command.Parameters.AddWithValue("@sold", vehicle.Sold);
-            command.Parameters.AddWithValue("@model", vehicle.Model.Id);
-            command.Parameters.AddWithValue("@year", vehicle.Year);
+           // command.Parameters.AddWithValue("@used", vehicle.Used);
+           // command.Parameters.AddWithValue("@sold", vehicle.Sold);
+           // command.Parameters.AddWithValue("@model", vehicle.Model.Id);
+           // command.Parameters.AddWithValue("@year", vehicle.Year);
             command.ExecuteNonQuery();
 
             //TODO: print vehicle information for debugging
@@ -51,15 +51,15 @@ namespace UsedCarSales
             MySqlCommand command = new MySqlCommand(query, DatabaseConnection.Instance.connection);
 
             //need the ID to edit the specific vehicle
-            command.Parameters.AddWithValue("@id", vehicle.Id);
+           // command.Parameters.AddWithValue("@id", vehicle.Id);
 
-            command.Parameters.AddWithValue("@used", vehicle.Used);
-            command.Parameters.AddWithValue("@sold", vehicle.Sold);
-            command.Parameters.AddWithValue("@model", vehicle.Model.Id);
-            command.Parameters.AddWithValue("@year", vehicle.Year);
-            command.ExecuteNonQuery();
+           // command.Parameters.AddWithValue("@used", vehicle.Used);
+           // command.Parameters.AddWithValue("@sold", vehicle.Sold);
+           // command.Parameters.AddWithValue("@model", vehicle.Model.Id);
+           // command.Parameters.AddWithValue("@year", vehicle.Year);
+           // command.ExecuteNonQuery();
 
-            Console.WriteLine("Vehicle {0} edited successfully", vehicle.Id);
+           // Console.WriteLine("Vehicle {0} edited successfully", vehicle.Id);
         }
 
         public bool deleteVehicle(Vehicle vehicle)
@@ -70,7 +70,7 @@ namespace UsedCarSales
 
             try
             {
-                command.Parameters.AddWithValue("@id", vehicle.Id);
+                //command.Parameters.AddWithValue("@id", vehicle.Id);
                 command.ExecuteNonQuery();
             } catch (Exception e)
             {
@@ -79,7 +79,7 @@ namespace UsedCarSales
                 return false;
             }
 
-            Console.WriteLine("Vehicle {0} deleted successfully", vehicle.Id);
+            //Console.WriteLine("Vehicle {0} deleted successfully", vehicle.Id);
 
             return true;
         }
@@ -90,10 +90,10 @@ namespace UsedCarSales
             var query = "SELECT * FROM Vehicle WHERE ";
 
             List<String> parameters = new List<String>();
-            if (vehicle.Used != null) parameters.Add("used=@used");
-            if (vehicle.Sold != null) parameters.Add("sold=@sold");
+           // if (vehicle.Used != null) parameters.Add("used=@used");
+            //if (vehicle.Sold != null) parameters.Add("sold=@sold");
             if (vehicle.Model != null) parameters.Add("model=@model");
-            if (vehicle.Year != null) parameters.Add("year=@year");
+           // if (vehicle.Year != null) parameters.Add("year=@year");
 
             for (int i = 0; i < parameters.Count; i++)
             {
@@ -106,10 +106,10 @@ namespace UsedCarSales
 
             MySqlCommand command = new MySqlCommand(query, DatabaseConnection.Instance.connection);
 
-            if (vehicle.Used != null) command.Parameters.AddWithValue("@used", vehicle.Used);
-            if (vehicle.Sold != null) command.Parameters.AddWithValue("@sold", vehicle.Sold);
-            if (vehicle.Model != null) command.Parameters.AddWithValue("@model", vehicle.Model.Id);
-            if (vehicle.Year != null) command.Parameters.AddWithValue("@year", vehicle.Year);
+           // if (vehicle.Used != null) command.Parameters.AddWithValue("@used", vehicle.Used);
+           // if (vehicle.Sold != null) command.Parameters.AddWithValue("@sold", vehicle.Sold);
+           // if (vehicle.Model != null) command.Parameters.AddWithValue("@model", vehicle.Model.Id);
+           // if (vehicle.Year != null) command.Parameters.AddWithValue("@year", vehicle.Year);
 
             MySqlDataReader reader = command.ExecuteReader();
 
@@ -121,14 +121,14 @@ namespace UsedCarSales
             {
                 v = new Vehicle();
 
-                v.Id = Int32.Parse(reader["id"].ToString());
-                v.Used = Boolean.Parse(reader["used"].ToString());
-                v.Sold = Boolean.Parse(reader["sold"].ToString());
-                v.Year = Int32.Parse(reader["year"].ToString());
+               // v.Id = Int32.Parse(reader["id"].ToString());
+               // v.Used = Boolean.Parse(reader["used"].ToString());
+               //v.Sold = Boolean.Parse(reader["sold"].ToString());
+               // v.Year = Int32.Parse(reader["year"].ToString());
 
                 //get the id from the model in case we want to load the entire model later on
                 Model model = new Model();
-                model.Id = reader["model"].ToString();
+               // model.Id = reader["model"].ToString();
                 v.Model = model;
 
                 vehicles.Add(v);
