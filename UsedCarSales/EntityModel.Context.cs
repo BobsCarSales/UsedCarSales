@@ -13,10 +13,10 @@ namespace UsedCarSales
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class csc440GroupProjectEntities1 : DbContext
+    public partial class EntityContext : DbContext
     {
-        public csc440GroupProjectEntities1()
-            : base("name=csc440GroupProjectEntities1")
+        public EntityContext()
+            : base("name=EntityContext")
         {
         }
     

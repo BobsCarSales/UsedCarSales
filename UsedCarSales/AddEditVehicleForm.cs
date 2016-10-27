@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using UsedCarSales.DataAccessObjects;
 
 namespace UsedCarSales
 {
@@ -8,9 +9,6 @@ namespace UsedCarSales
     {
         public const int ADD_VEHICLE = 0;
         public const int EDIT_VEHICLE = 1;
-
-        ModelDataAccess modelDatabaseHandler = ModelDataAccess.Instance;
-        VehicleDataAccess vehicleDatabaseHandler = VehicleDataAccess.Instance;
 
         Vehicle CurrentVehicle { get; set; }
         int mode;
@@ -55,20 +53,22 @@ namespace UsedCarSales
             {
                 Vehicle vehicle = new Vehicle();
                 vehicle.Model = (Model)modelDropDown.SelectedItem;
-               // vehicle.Sold = soldCheckBox.Checked;
-                //vehicle.Used = usedCheckBox.Checked;
-                //vehicle.Year = Int32.Parse(yearTextBox.Text);
+                vehicle.sold = soldCheckBox.Checked;
+                vehicle.used = usedCheckBox.Checked;
 
-                vehicleDatabaseHandler.addVehicle(vehicle);
+                //TODO: need to check for a valid year here
+                vehicle.year = Int32.Parse(yearTextBox.Text);
+
+                VehicleDAO.AddVehicle(vehicle);
             }
             else if(mode == EDIT_VEHICLE)
             {
                 CurrentVehicle.Model = (Model)modelDropDown.SelectedItem;
-                //CurrentVehicle.Sold = soldCheckBox.Checked;
-               // CurrentVehicle.Used = usedCheckBox.Checked;
-                //CurrentVehicle.Year = Int32.Parse(yearTextBox.Text);
+                CurrentVehicle.sold = soldCheckBox.Checked;
+                CurrentVehicle.used = usedCheckBox.Checked;
+                CurrentVehicle.year = Int32.Parse(yearTextBox.Text);
 
-                vehicleDatabaseHandler.editVehicle(CurrentVehicle);
+                VehicleDAO.EditVehicle(CurrentVehicle);
             }
 
             this.Close();
@@ -80,11 +80,12 @@ namespace UsedCarSales
         {
             if (makeDropDown.SelectedItem != null)
             {
-               // List<Model> models = modelDatabaseHandler.GetModelByMakeId( ((Make)makeDropDown.SelectedItem).Id);
+                Make make = (Make)makeDropDown.SelectedItem;
+                List<Model> models = ModelDAO.GetModelsByMake(make);
 
                 modelDropDown.DisplayMember = "Id";
                 modelDropDown.ValueMember = "Id";
-                //modelDropDown.DataSource = models;
+                modelDropDown.DataSource = models;
             }
         }
 

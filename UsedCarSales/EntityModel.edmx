@@ -166,7 +166,7 @@
           <End Role="Model" Type="Self.Model" Multiplicity="1" />
           <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="csc440GroupProjectEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="EntityContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Makes" EntityType="Self.Make" />
           <EntitySet Name="Models" EntityType="Self.Model" />
@@ -190,7 +190,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="csc440GroupProjectModelStoreContainer" CdmEntityContainer="csc440GroupProjectEntities1">
+        <EntityContainerMapping StorageEntityContainer="csc440GroupProjectModelStoreContainer" CdmEntityContainer="EntityContext">
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="csc440GroupProjectModel.Customer">
               <MappingFragment StoreEntitySet="Customer">

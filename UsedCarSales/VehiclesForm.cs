@@ -1,23 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using UsedCarSales.DataAccessObjects;
 
 namespace UsedCarSales
 {
     public partial class VehiclesForm : Form
     {
+        EntityContext dbContext = new EntityContext();
+
         public const int ADD_VEHICLE = 0;
         public const int EDIT_VEHICLE = 1;
-
-        MakeDataAccess makeDatabaseHandler = MakeDataAccess.Instance;
-        VehicleDataAccess vehicleDatabaseHandler = VehicleDataAccess.Instance;
-        ModelDataAccess modelDatabaseHandler = ModelDataAccess.Instance;
 
         List<Vehicle> vehicles = new List<Vehicle>();
 
@@ -45,12 +40,10 @@ namespace UsedCarSales
         //will only be called once when the VehiclesFrom loads
         private void loadMakes()
         {
-            csc440GroupProjectEntities1 db = new csc440GroupProjectEntities1();
-            List<Make> allMakes = db.Makes.ToList();
-            //allMakes = allMakes.OrderBy(m => m.Id).ToList<Make>();
+            List<Make> allMakes = dbContext.Makes.ToList();
 
-            makeDropDownBox.DisplayMember = "Id";
-            makeDropDownBox.ValueMember = "Id";
+            makeDropDownBox.DisplayMember = "id";
+            makeDropDownBox.ValueMember = "id";
             makeDropDownBox.DataSource = allMakes;
         }
 
@@ -60,12 +53,12 @@ namespace UsedCarSales
         {
             if(makeDropDownBox.SelectedItem != null)
             {
+                Make selectedMake = (Make)makeDropDownBox.SelectedItem;
+                List<Model> models = ModelDAO.GetModelsByMake(selectedMake);
 
-                //List<Model> models = modelDatabaseHandler.GetModelByMakeId( ((Make)makeDropDownBox.SelectedItem).Id);
-
-                modelDropDownBox.DisplayMember = "Id";
-                modelDropDownBox.ValueMember = "Id";
-               // modelDropDownBox.DataSource = models;
+                modelDropDownBox.DisplayMember = "id";
+                modelDropDownBox.ValueMember = "id";
+                modelDropDownBox.DataSource = models;
             }
         }
 
@@ -105,16 +98,17 @@ namespace UsedCarSales
             Vehicle vehicle = new Vehicle();
 
             vehicle.Model = (Model)modelDropDownBox.SelectedItem;
-            //vehicle.Used = usedCheckBox.Checked;
-            //vehicle.Sold = soldCheckBox.Checked;
+            vehicle.used = usedCheckBox.Checked;
+            vehicle.sold = soldCheckBox.Checked;
+            String year = yearTextBox.Text.ToString();
 
-            vehicles = vehicleDatabaseHandler.searchVehicle(vehicle);
-
-            foreach (Vehicle v in vehicles)
+            if(String.IsNullOrEmpty(year))
             {
-               // v.Model = modelDatabaseHandler.GetModelById(v.Model.Id);
+                //-1 is an invalid value for year, it will be ignored
+                vehicle.year = -1;
             }
 
+            vehicles = VehicleDAO.SearchVehicles(vehicle);
             vehiclesListBox.DataSource = vehicles;
         }
 
@@ -144,17 +138,14 @@ namespace UsedCarSales
                                      MessageBoxButtons.YesNo);
             if (confirmResult == DialogResult.Yes)
             {
-                bool success = vehicleDatabaseHandler.deleteVehicle((Vehicle) vehiclesListBox.SelectedItem);
+                VehicleDAO.RemoveVehicle((Vehicle) vehiclesListBox.SelectedItem);
 
-                if(success)
-                {
-                    Console.WriteLine("Vehicle successfully deleted");
+                Console.WriteLine("Vehicle successfully deleted");
 
-                    Vehicle deletedVehicle = (Vehicle) vehiclesListBox.SelectedItem;
-                    vehicles.Remove(deletedVehicle);
-                    vehiclesListBox.DataSource = null;
-                    vehiclesListBox.DataSource = vehicles;
-                }
+                Vehicle deletedVehicle = (Vehicle) vehiclesListBox.SelectedItem;
+                vehicles.Remove(deletedVehicle);
+                vehiclesListBox.DataSource = null;
+                vehiclesListBox.DataSource = vehicles;
             }
         }
 

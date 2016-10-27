@@ -85,6 +85,8 @@
     <Compile Include="Customer.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataAccessObjects\ModelDAO.cs" />
+    <Compile Include="DataAccessObjects\VehicleDAO.cs" />
     <Compile Include="DatabaseConnection.cs" />
     <Compile Include="EntityModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -110,16 +112,13 @@
     <Compile Include="Make.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="MakeDataAccess.cs" />
     <Compile Include="Model.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModelDataAccess.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Promotion.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="PromotionDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SellVehicleForm.cs">
       <SubType>Form</SubType>
@@ -130,7 +129,7 @@
     <Compile Include="Vehicle.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="VehicleDataAccess.cs" />
+    <Compile Include="VehiclePartial.cs" />
     <Compile Include="VehiclesForm.cs">
       <SubType>Form</SubType>
     </Compile>
