@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace UsedCarSales.DataAccessObjects
 {
-    public static class ModelDAO
+    class MakeDAO
     {
-
-        public static List<Model> GetModelsByMake(Make make)
+        public static List<Make> GetAllMakes()
         {
-            return DatabaseContext.dbContext.Models.Where(m => m.Make.id == make.id).ToList();
+            return DatabaseContext.dbContext.Makes.ToList();
         }
-
     }
 }

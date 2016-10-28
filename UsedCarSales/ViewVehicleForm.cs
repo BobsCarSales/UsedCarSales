@@ -20,11 +20,11 @@ namespace UsedCarSales
 
         private void initializeForm(Vehicle vehicle)
         {
-            //makeValueLabel.Text = vehicle.Model.Make;
-            //modelValueLabel.Text = vehicle.Model.Id;
-            //yearValueLabel.Text = vehicle.Year.ToString();
-            //usedValueLabel.Text = vehicle.Used.ToString();
-            //soldValueLabel.Text = vehicle.Sold.ToString();
+            makeValueLabel.Text = vehicle.Model.Make.id;
+            modelValueLabel.Text = vehicle.Model.id;
+            yearValueLabel.Text = vehicle.year.ToString();
+            usedValueLabel.Text = vehicle.used.ToString();
+            soldValueLabel.Text = vehicle.sold.ToString();
         }
     }
 }

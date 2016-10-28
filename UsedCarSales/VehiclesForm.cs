@@ -9,8 +9,6 @@ namespace UsedCarSales
 {
     public partial class VehiclesForm : Form
     {
-        EntityContext dbContext = new EntityContext();
-
         public const int ADD_VEHICLE = 0;
         public const int EDIT_VEHICLE = 1;
 
@@ -21,7 +19,8 @@ namespace UsedCarSales
             InitializeComponent();
 
             initializeDropDowns();
-            loadMakes();
+            initializeVehicleListBox();
+            initializeMakes();
         }
 
         private void initializeDropDowns()
@@ -33,14 +32,39 @@ namespace UsedCarSales
 
         private void initializeVehicleListBox()
         {
+            viewVehicleButton.Enabled = false;
+            editVehicleButton.Enabled = false;
+            removeVehicleButton.Enabled = false;
+
             //when a vehicle is selected or deselected, the edit vehicle button needs to be enabled or disabled
-            this.vehiclesListBox.SelectedValueChanged += new System.EventHandler(initializeEditVehicleButton);
+            this.vehiclesListBox.SelectedValueChanged += new System.EventHandler(initializeButtons);
+        }
+        
+        private void initializeButtons(object sender, System.EventArgs e)
+        {
+            changeButtonEnabledValues();
+        }
+
+        private void changeButtonEnabledValues()
+        {
+            if (vehiclesListBox.SelectedItem == null)
+            {
+                editVehicleButton.Enabled = false;
+                viewVehicleButton.Enabled = false;
+                removeVehicleButton.Enabled = false;
+            }
+            else
+            {
+                editVehicleButton.Enabled = true;
+                viewVehicleButton.Enabled = true;
+                removeVehicleButton.Enabled = true;
+            }
         }
 
         //will only be called once when the VehiclesFrom loads
-        private void loadMakes()
+        private void initializeMakes()
         {
-            List<Make> allMakes = dbContext.Makes.ToList();
+            List<Make> allMakes = MakeDAO.GetAllMakes();
 
             makeDropDownBox.DisplayMember = "id";
             makeDropDownBox.ValueMember = "id";
@@ -62,22 +86,6 @@ namespace UsedCarSales
             }
         }
 
-        //TODO: NOT WORKING YET
-        //Enable or Disable the EditVehicleButton based on whether a vehicle is selected or not
-        private void initializeEditVehicleButton(object sender, System.EventArgs e)
-        {
-            if(vehiclesListBox.SelectedItem == null)
-            {
-                editVehicleButton.Enabled = false;
-                viewVehicleButton.Enabled = false;
-            }
-            else
-            {
-                editVehicleButton.Enabled = true;
-                viewVehicleButton.Enabled = true;
-            }
-        }
-
         //Theres no point in reloading the makes and models from the database in the AddEditVehicleForm, so we get them from the dropdowns that have already been loaded
         //as far as I know theres no way to cast ComboBox.ObjectCollection to a List, so here we are
         //I could pass the ComboBox.ObjectCollection, but I can't set the dataSource of the other drop down that way (not sure why)
@@ -93,23 +101,37 @@ namespace UsedCarSales
             return itemList;
         }
 
+        private void allVehiclesButton_Click(object sender, EventArgs e)
+        {
+            vehicles.Clear();
+
+            vehicles = VehicleDAO.GetAllVehicles();
+            vehiclesListBox.DataSource = vehicles;
+
+            if(vehicles.Count < 1)
+            {
+                changeButtonEnabledValues();
+            }
+        }
+
         private void searchVehicleButton_Click(object sender, EventArgs e)
         {
+            vehicles.Clear();
+
             Vehicle vehicle = new Vehicle();
 
             vehicle.Model = (Model)modelDropDownBox.SelectedItem;
             vehicle.used = usedCheckBox.Checked;
             vehicle.sold = soldCheckBox.Checked;
-            String year = yearTextBox.Text.ToString();
-
-            if(String.IsNullOrEmpty(year))
-            {
-                //-1 is an invalid value for year, it will be ignored
-                vehicle.year = -1;
-            }
+            vehicle.year = DateUtil.HandleYearString(yearTextBox.Text.ToString());
 
             vehicles = VehicleDAO.SearchVehicles(vehicle);
             vehiclesListBox.DataSource = vehicles;
+
+            if(vehicles.Count < 1)
+            {
+                changeButtonEnabledValues();
+            }
         }
 
         private void addVehicleButton_Click(object sender, EventArgs e)
@@ -120,7 +142,6 @@ namespace UsedCarSales
 
         private void editVehicleButton_Click(object sender, EventArgs e)
         {
-            //TODO: editVehicle button should be disabled when selecteditem is null;
             if(vehiclesListBox.SelectedItem != null)
             {
                 AddEditVehicleForm editVehicleForm = new AddEditVehicleForm((Vehicle)vehiclesListBox.SelectedItem, EDIT_VEHICLE, getMakesList());
@@ -133,25 +154,23 @@ namespace UsedCarSales
 
         private void removeVehicle_Click(object sender, EventArgs e)
         {
-            var confirmResult = MessageBox.Show("Are you sure to delete this vehicle?",
-                                     "Confirm Deletion of Vehicle",
-                                     MessageBoxButtons.YesNo);
+            var confirmResult = MessageBox.Show("Are you sure to delete this vehicle?", "Confirm Deletion of Vehicle", MessageBoxButtons.YesNo);
+
             if (confirmResult == DialogResult.Yes)
             {
                 VehicleDAO.RemoveVehicle((Vehicle) vehiclesListBox.SelectedItem);
-
-                Console.WriteLine("Vehicle successfully deleted");
-
                 Vehicle deletedVehicle = (Vehicle) vehiclesListBox.SelectedItem;
                 vehicles.Remove(deletedVehicle);
+
                 vehiclesListBox.DataSource = null;
                 vehiclesListBox.DataSource = vehicles;
+
+                Console.WriteLine("Vehicle successfully deleted");
             }
         }
 
         private void viewVehicleButton_Click(object sender, EventArgs e)
         {
-            //TODO: viewVehicle button should be disabled when selecteditem is null;
             if (vehiclesListBox.SelectedItem != null)
             {
                 ViewVehicleForm viewVehicleForm = new ViewVehicleForm((Vehicle)vehiclesListBox.SelectedItem);

@@ -38,15 +38,16 @@
             this.searchVehicleButton = new System.Windows.Forms.Button();
             this.viewVehicleButton = new System.Windows.Forms.Button();
             this.editVehicleButton = new System.Windows.Forms.Button();
-            this.removeVehicle = new System.Windows.Forms.Button();
+            this.removeVehicleButton = new System.Windows.Forms.Button();
             this.vehiclesListBox = new System.Windows.Forms.ListBox();
             this.yearLabel = new System.Windows.Forms.Label();
             this.yearTextBox = new System.Windows.Forms.TextBox();
+            this.allVehiclesButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // addVehicleButton
             // 
-            this.addVehicleButton.Location = new System.Drawing.Point(427, 68);
+            this.addVehicleButton.Location = new System.Drawing.Point(428, 124);
             this.addVehicleButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addVehicleButton.Name = "addVehicleButton";
             this.addVehicleButton.Size = new System.Drawing.Size(125, 50);
@@ -118,7 +119,7 @@
             // 
             // searchVehicleButton
             // 
-            this.searchVehicleButton.Location = new System.Drawing.Point(427, 12);
+            this.searchVehicleButton.Location = new System.Drawing.Point(428, 70);
             this.searchVehicleButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.searchVehicleButton.Name = "searchVehicleButton";
             this.searchVehicleButton.Size = new System.Drawing.Size(125, 50);
@@ -129,7 +130,7 @@
             // 
             // viewVehicleButton
             // 
-            this.viewVehicleButton.Location = new System.Drawing.Point(427, 124);
+            this.viewVehicleButton.Location = new System.Drawing.Point(428, 178);
             this.viewVehicleButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.viewVehicleButton.Name = "viewVehicleButton";
             this.viewVehicleButton.Size = new System.Drawing.Size(125, 50);
@@ -140,7 +141,7 @@
             // 
             // editVehicleButton
             // 
-            this.editVehicleButton.Location = new System.Drawing.Point(427, 180);
+            this.editVehicleButton.Location = new System.Drawing.Point(428, 232);
             this.editVehicleButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.editVehicleButton.Name = "editVehicleButton";
             this.editVehicleButton.Size = new System.Drawing.Size(125, 50);
@@ -149,25 +150,25 @@
             this.editVehicleButton.UseVisualStyleBackColor = true;
             this.editVehicleButton.Click += new System.EventHandler(this.editVehicleButton_Click);
             // 
-            // removeVehicle
+            // removeVehicleButton
             // 
-            this.removeVehicle.Location = new System.Drawing.Point(427, 236);
-            this.removeVehicle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.removeVehicle.Name = "removeVehicle";
-            this.removeVehicle.Size = new System.Drawing.Size(125, 50);
-            this.removeVehicle.TabIndex = 12;
-            this.removeVehicle.Text = "Remove Vehicle";
-            this.removeVehicle.UseVisualStyleBackColor = true;
-            this.removeVehicle.Click += new System.EventHandler(this.removeVehicle_Click);
+            this.removeVehicleButton.Location = new System.Drawing.Point(428, 286);
+            this.removeVehicleButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.removeVehicleButton.Name = "removeVehicleButton";
+            this.removeVehicleButton.Size = new System.Drawing.Size(125, 50);
+            this.removeVehicleButton.TabIndex = 12;
+            this.removeVehicleButton.Text = "Remove Vehicle";
+            this.removeVehicleButton.UseVisualStyleBackColor = true;
+            this.removeVehicleButton.Click += new System.EventHandler(this.removeVehicle_Click);
             // 
             // vehiclesListBox
             // 
             this.vehiclesListBox.FormattingEnabled = true;
             this.vehiclesListBox.ItemHeight = 16;
-            this.vehiclesListBox.Location = new System.Drawing.Point(20, 122);
+            this.vehiclesListBox.Location = new System.Drawing.Point(12, 108);
             this.vehiclesListBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.vehiclesListBox.Name = "vehiclesListBox";
-            this.vehiclesListBox.Size = new System.Drawing.Size(381, 164);
+            this.vehiclesListBox.Size = new System.Drawing.Size(381, 228);
             this.vehiclesListBox.TabIndex = 13;
             // 
             // yearLabel
@@ -186,15 +187,26 @@
             this.yearTextBox.Size = new System.Drawing.Size(78, 22);
             this.yearTextBox.TabIndex = 15;
             // 
+            // allVehiclesButton
+            // 
+            this.allVehiclesButton.Location = new System.Drawing.Point(428, 14);
+            this.allVehiclesButton.Name = "allVehiclesButton";
+            this.allVehiclesButton.Size = new System.Drawing.Size(125, 50);
+            this.allVehiclesButton.TabIndex = 16;
+            this.allVehiclesButton.Text = "All Vehicles";
+            this.allVehiclesButton.UseVisualStyleBackColor = true;
+            this.allVehiclesButton.Click += new System.EventHandler(this.allVehiclesButton_Click);
+            // 
             // VehiclesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(565, 304);
+            this.ClientSize = new System.Drawing.Size(565, 347);
+            this.Controls.Add(this.allVehiclesButton);
             this.Controls.Add(this.yearTextBox);
             this.Controls.Add(this.yearLabel);
             this.Controls.Add(this.vehiclesListBox);
-            this.Controls.Add(this.removeVehicle);
+            this.Controls.Add(this.removeVehicleButton);
             this.Controls.Add(this.editVehicleButton);
             this.Controls.Add(this.viewVehicleButton);
             this.Controls.Add(this.searchVehicleButton);
@@ -225,9 +237,10 @@
         private System.Windows.Forms.Button searchVehicleButton;
         private System.Windows.Forms.Button viewVehicleButton;
         private System.Windows.Forms.Button editVehicleButton;
-        private System.Windows.Forms.Button removeVehicle;
+        private System.Windows.Forms.Button removeVehicleButton;
         private System.Windows.Forms.ListBox vehiclesListBox;
         private System.Windows.Forms.Label yearLabel;
         private System.Windows.Forms.TextBox yearTextBox;
+        private System.Windows.Forms.Button allVehiclesButton;
     }
 }

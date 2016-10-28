@@ -40,10 +40,10 @@ namespace UsedCarSales
             if (CurrentVehicle != null)
             {
                 if (CurrentVehicle.Model.Make != null) makeDropDown.SelectedItem = CurrentVehicle.Model.Make;
-                //if (CurrentVehicle.Model.Id != null) modelDropDown.SelectedItem = CurrentVehicle.Model.Id;
-                //if (CurrentVehicle.Used != null) usedCheckBox.Checked = (bool) CurrentVehicle.Used;
-                //if (CurrentVehicle.Sold != null) soldCheckBox.Checked = (bool) CurrentVehicle.Sold;
-                //if (CurrentVehicle.Year != null) yearTextBox.Text = CurrentVehicle.Year.ToString();
+                if (CurrentVehicle.Model.id != null) modelDropDown.SelectedItem = CurrentVehicle.Model.id;
+                if (CurrentVehicle.used != null) usedCheckBox.Checked = (bool) CurrentVehicle.used;
+                if (CurrentVehicle.sold != null) soldCheckBox.Checked = (bool) CurrentVehicle.sold;
+                if (CurrentVehicle.year != -1) yearTextBox.Text = CurrentVehicle.year.ToString();
             }
         }
 
@@ -55,23 +55,34 @@ namespace UsedCarSales
                 vehicle.Model = (Model)modelDropDown.SelectedItem;
                 vehicle.sold = soldCheckBox.Checked;
                 vehicle.used = usedCheckBox.Checked;
+                vehicle.year = DateUtil.HandleYearString(yearTextBox.Text.ToString());
 
-                //TODO: need to check for a valid year here
-                vehicle.year = Int32.Parse(yearTextBox.Text);
-
-                VehicleDAO.AddVehicle(vehicle);
+                if(vehicle.year != DateUtil.INVALID_YEAR)
+                {
+                    VehicleDAO.AddVehicle(vehicle);
+                    this.Close();
+                } else
+                {
+                    MessageBox.Show("Please enter a valid year", "Invalid Year Value", MessageBoxButtons.OK);
+                }
             }
             else if(mode == EDIT_VEHICLE)
             {
                 CurrentVehicle.Model = (Model)modelDropDown.SelectedItem;
                 CurrentVehicle.sold = soldCheckBox.Checked;
                 CurrentVehicle.used = usedCheckBox.Checked;
-                CurrentVehicle.year = Int32.Parse(yearTextBox.Text);
+                CurrentVehicle.year = DateUtil.HandleYearString(yearTextBox.Text.ToString());
 
-                VehicleDAO.EditVehicle(CurrentVehicle);
+                if (CurrentVehicle.year != DateUtil.INVALID_YEAR)
+                {
+                    VehicleDAO.EditVehicle(CurrentVehicle);
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a valid year", "Invalid Year Value", MessageBoxButtons.OK);
+                }
             }
-
-            this.Close();
         }
 
         //TODO: will be called everytime makeDropDown changes, need to move some of the init stuff out

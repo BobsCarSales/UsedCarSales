@@ -8,22 +8,25 @@ namespace UsedCarSales.DataAccessObjects
 {
     public static class VehicleDAO
     {
-        public static EntityContext dbContext = new EntityContext();
-   
+        public static List<Vehicle> GetAllVehicles()
+        {
+            return DatabaseContext.dbContext.Vehicles.ToList();
+        }
+
         public static List<Vehicle> SearchVehicles(Vehicle vehicle)
         {
             List<Vehicle> vehicles = new List<Vehicle>();
 
-            if (vehicle.year != -1)
+            if (vehicle.year != DateUtil.INVALID_YEAR)
             {
-                vehicles = dbContext.Vehicles.Where(v => ((v.Model.id == vehicle.Model.id)
+                vehicles = DatabaseContext.dbContext.Vehicles.Where(v => ((v.Model.id == vehicle.Model.id)
                                                             && (v.used == vehicle.used)
                                                             && (v.sold == vehicle.sold)
                                                             && (v.year == vehicle.year))).ToList();
             }
             else
             {
-                vehicles = dbContext.Vehicles.Where(v => ((v.Model.id == vehicle.Model.id)
+                vehicles = DatabaseContext.dbContext.Vehicles.Where(v => ((v.Model.id == vehicle.Model.id)
                                                             && (v.used == vehicle.used)
                                                             && (v.sold == vehicle.sold))).ToList();
             }
@@ -33,22 +36,23 @@ namespace UsedCarSales.DataAccessObjects
 
         public static void RemoveVehicle(Vehicle vehicle)
         {
-            dbContext.Vehicles.Remove(vehicle);
-            dbContext.SaveChangesAsync();
+            DatabaseContext.dbContext.Vehicles.Remove(vehicle);
+            DatabaseContext.dbContext.SaveChangesAsync();
         }
 
         public static void AddVehicle(Vehicle vehicle)
         {
-            dbContext.Vehicles.Add(vehicle);
-            dbContext.SaveChangesAsync();
+            DatabaseContext.dbContext.Vehicles.Add(vehicle);
+            DatabaseContext.dbContext.SaveChangesAsync();
         }
 
         public static void EditVehicle(Vehicle vehicle)
         {
-            Vehicle vehicleToUpdate = dbContext.Vehicles.First(v => v.id == vehicle.id);
-            dbContext.Vehicles.Attach(vehicleToUpdate);
+            Vehicle vehicleToUpdate = DatabaseContext.dbContext.Vehicles.First(v => v.id == vehicle.id);
+
+            DatabaseContext.dbContext.Vehicles.Attach(vehicleToUpdate);
             vehicleToUpdate = vehicle;
-            dbContext.SaveChangesAsync();
+            DatabaseContext.dbContext.SaveChangesAsync();
         }
     }
 }

@@ -85,9 +85,10 @@
     <Compile Include="Customer.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataAccessObjects\DatabaseContext.cs" />
+    <Compile Include="DataAccessObjects\MakeDAO.cs" />
     <Compile Include="DataAccessObjects\ModelDAO.cs" />
     <Compile Include="DataAccessObjects\VehicleDAO.cs" />
-    <Compile Include="DatabaseConnection.cs" />
     <Compile Include="EntityModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -142,6 +143,7 @@
     <Compile Include="ViewVehicleForm.Designer.cs">
       <DependentUpon>ViewVehicleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DateUtil.cs" />
     <EmbeddedResource Include="AddCustomerForm.resx">
       <DependentUpon>AddCustomerForm.cs</DependentUpon>
     </EmbeddedResource>
