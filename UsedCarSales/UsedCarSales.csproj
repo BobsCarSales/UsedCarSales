@@ -127,6 +127,7 @@
     <Compile Include="Promotion.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="PromotionPartial.cs" />
     <Compile Include="PromotionsForm.cs">
       <SubType>Form</SubType>
     </Compile>

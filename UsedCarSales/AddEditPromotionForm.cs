@@ -25,9 +25,11 @@ namespace UsedCarSales
 
             this.currentPromotion = promotion;
             this.mode = mode;
+
+            initializeForm(makes);
         }
 
-        public void InitializeForm(List<Make> makes)
+        private void initializeForm(List<Make> makes)
         {
             makeDropDownBox.DisplayMember = "Id";
             makeDropDownBox.ValueMember = "Id";
@@ -51,6 +53,7 @@ namespace UsedCarSales
                 if(promotion.Make != null && promotion.discountAmount != null)
                 {
                     PromotionDAO.AddPromotion(promotion);
+                    this.Close();
                 } else
                 {
                     //TODO: should show a different error message depending on what value is null
@@ -65,6 +68,7 @@ namespace UsedCarSales
                 if (currentPromotion.Make != null && currentPromotion.discountAmount != null)
                 {
                     PromotionDAO.EditPromotion(currentPromotion);
+                    this.Close();
                 }
                 else
                 {

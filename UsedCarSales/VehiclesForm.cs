@@ -103,8 +103,6 @@ namespace UsedCarSales
 
         private void allVehiclesButton_Click(object sender, EventArgs e)
         {
-            vehicles.Clear();
-
             vehicles = VehicleDAO.GetAllVehicles();
             vehiclesListBox.DataSource = vehicles;
 
@@ -116,8 +114,6 @@ namespace UsedCarSales
 
         private void searchVehicleButton_Click(object sender, EventArgs e)
         {
-            vehicles.Clear();
-
             Vehicle vehicle = new Vehicle();
 
             vehicle.Model = (Model)modelDropDownBox.SelectedItem;

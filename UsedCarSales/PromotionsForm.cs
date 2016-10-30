@@ -16,9 +16,42 @@ namespace UsedCarSales
         public const int ADD_PROMOTION = 0;
         public const int EDIT_PROMOTION = 1;
 
+        List<Promotion> promotions = new List<Promotion>();
+
         public PromotionsForm()
         {
             InitializeComponent();
+
+            initializeMakes();
+            initializePromotionListBox();
+        }
+
+        private void initializePromotionListBox()
+        {
+            editPromotionButton.Enabled = false;
+            removePromotionButton.Enabled = false;
+
+            //when a vehicle is selected or deselected, the edit vehicle button needs to be enabled or disabled
+            this.promotionsListBox.SelectedValueChanged += new System.EventHandler(initializeButtons);
+        }
+
+        private void initializeButtons(object sender, System.EventArgs e)
+        {
+            changeButtonEnabledValues();
+        }
+
+        private void changeButtonEnabledValues()
+        {
+            if (promotionsListBox.SelectedItem == null)
+            {
+                editPromotionButton.Enabled = false;
+                removePromotionButton.Enabled = false;
+            }
+            else
+            {
+                editPromotionButton.Enabled = true;
+                removePromotionButton.Enabled = true;
+            }
         }
 
         //will only be called once when the VehiclesFrom loads
@@ -48,13 +81,24 @@ namespace UsedCarSales
 
         private void allPromotionsButton_Click(object sender, EventArgs e)
         {
-            List<Promotion> promotions = PromotionDAO.GetAllPromotions();
+            promotions = PromotionDAO.GetAllPromotions();
             promotionsListBox.DataSource = promotions;
+
+            if (promotions.Count < 1)
+            {
+                changeButtonEnabledValues();
+            }
         }
 
         private void searchPromotionsButton_Click(object sender, EventArgs e)
         {
-            List<Promotion> promotions = PromotionDAO.GetPromotionsByMake( (Make)makeDropDownBox.SelectedItem );
+            promotions = PromotionDAO.GetPromotionsByMake( (Make)makeDropDownBox.SelectedItem );
+            promotionsListBox.DataSource = promotions;
+
+            if (promotions.Count < 1)
+            {
+                changeButtonEnabledValues();
+            }
         }
 
         private void addPromotionsButton_Click(object sender, EventArgs e)
@@ -77,7 +121,19 @@ namespace UsedCarSales
 
         private void removePromotionButton_Click(object sender, EventArgs e)
         {
+            var confirmResult = MessageBox.Show("Are you sure to delete this promotion?", "Confirm Deletion of Promotion", MessageBoxButtons.YesNo);
 
+            if (confirmResult == DialogResult.Yes)
+            {
+                PromotionDAO.RemovePromotion((Promotion)promotionsListBox.SelectedItem);
+                Promotion deletedPromotion = (Promotion)promotionsListBox.SelectedItem;
+                promotions.Remove(deletedPromotion);
+
+                promotionsListBox.DataSource = null;
+                promotionsListBox.DataSource = promotions;
+
+                Console.WriteLine("Promotion successfully deleted");
+            }
         }
 
     }
