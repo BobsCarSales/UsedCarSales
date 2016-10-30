@@ -30,7 +30,8 @@ namespace UsedCarSales
 
         private void promotionsButton_Click(object sender, EventArgs e)
         {
-
+            PromotionsForm promotionForm = new PromotionsForm();
+            promotionForm.Show();
         }
 
         private void transactionsButton_Click(object sender, EventArgs e)

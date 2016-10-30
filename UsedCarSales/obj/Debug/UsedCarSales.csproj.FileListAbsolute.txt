@@ -52,3 +52,5 @@ C:\Users\Christian\Development\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.
 \\Mac\Home\Development\UsedCarSales\UsedCarSales\bin\Debug\MySql.Data.Entity.EF6.dll
 \\Mac\Home\Development\UsedCarSales\UsedCarSales\bin\Debug\MySql.Web.dll
 \\Mac\Home\Development\UsedCarSales\UsedCarSales\bin\Debug\EntityFramework.SqlServer.xml
+\\Mac\Home\Development\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.AddEditPromotionForm.resources
+\\Mac\Home\Development\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.PromotionsForm.resources

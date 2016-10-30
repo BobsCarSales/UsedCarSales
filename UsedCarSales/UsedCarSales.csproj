@@ -76,6 +76,12 @@
     <Compile Include="AddCustomerForm.Designer.cs">
       <DependentUpon>AddCustomerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddEditPromotionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddEditPromotionForm.Designer.cs">
+      <DependentUpon>AddEditPromotionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddEditVehicleForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +94,7 @@
     <Compile Include="DataAccessObjects\DatabaseContext.cs" />
     <Compile Include="DataAccessObjects\MakeDAO.cs" />
     <Compile Include="DataAccessObjects\ModelDAO.cs" />
+    <Compile Include="DataAccessObjects\PromotionDAO.cs" />
     <Compile Include="DataAccessObjects\VehicleDAO.cs" />
     <Compile Include="EntityModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -120,6 +127,12 @@
     <Compile Include="Promotion.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="PromotionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PromotionsForm.Designer.cs">
+      <DependentUpon>PromotionsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SellVehicleForm.cs">
       <SubType>Form</SubType>
@@ -147,11 +160,17 @@
     <EmbeddedResource Include="AddCustomerForm.resx">
       <DependentUpon>AddCustomerForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddEditPromotionForm.resx">
+      <DependentUpon>AddEditPromotionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddEditVehicleForm.resx">
       <DependentUpon>AddEditVehicleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HomeForm.resx">
       <DependentUpon>HomeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PromotionsForm.resx">
+      <DependentUpon>PromotionsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
