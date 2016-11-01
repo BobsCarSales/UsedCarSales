@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="csc440GroupProjectModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="csc440GroupProjectModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="id" />
@@ -37,6 +37,18 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="discountAmount" Type="float" />
           <Property Name="make" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'def.csc440GroupProject.Transaction' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="Vehicle_id" />
+            <PropertyRef Name="Customer_id" />
+          </Key>
+          <Property Name="date" Type="date" />
+          <Property Name="totalCost" Type="float" />
+          <Property Name="Vehicle_id" Type="int" Nullable="false" />
+          <Property Name="Customer_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Vehicle">
           <Key>
@@ -72,6 +84,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_Transaction_Customer1">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="Customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Transaction_Vehicle1">
+          <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="1" />
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicle">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="Vehicle_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_VEHICLE_MODEL">
           <End Role="Model" Type="Self.Model" Multiplicity="1" />
           <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="*" />
@@ -90,6 +126,14 @@
           <EntitySet Name="Model" EntityType="Self.Model" Schema="csc440GroupProject" store:Type="Tables" />
           <EntitySet Name="Promotion" EntityType="Self.Promotion" Schema="csc440GroupProject" store:Type="Tables" />
           <EntitySet Name="Vehicle" EntityType="Self.Vehicle" Schema="csc440GroupProject" store:Type="Tables" />
+          <EntitySet Name="Transaction" EntityType="Self.Transaction" store:Type="Tables" store:Schema="csc440GroupProject">
+            <DefiningQuery>SELECT
+`Transaction`.`date`, 
+`Transaction`.`totalCost`, 
+`Transaction`.`Vehicle_id`, 
+`Transaction`.`Customer_id`
+FROM `Transaction` AS `Transaction`</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_MODEL_MAKE" Association="Self.FK_MODEL_MAKE">
             <End Role="Make" EntitySet="Make" />
             <End Role="Model" EntitySet="Model" />
@@ -98,13 +142,20 @@
             <End Role="Make" EntitySet="Make" />
             <End Role="Promotion" EntitySet="Promotion" />
           </AssociationSet>
+          <AssociationSet Name="fk_Transaction_Customer1" Association="Self.fk_Transaction_Customer1">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Transaction" EntitySet="Transaction" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Transaction_Vehicle1" Association="Self.fk_Transaction_Vehicle1">
+            <End Role="Vehicle" EntitySet="Vehicle" />
+            <End Role="Transaction" EntitySet="Transaction" />
+          </AssociationSet>
           <AssociationSet Name="FK_VEHICLE_MODEL" Association="Self.FK_VEHICLE_MODEL">
             <End Role="Model" EntitySet="Model" />
             <End Role="Vehicle" EntitySet="Vehicle" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="csc440GroupProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -119,6 +170,7 @@
           <Property Name="state" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="zipcode" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="phoneNumber" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Transactions" Relationship="csc440GroupProjectModel.fk_Transaction_Customer1" FromRole="Customer" ToRole="Transaction" />
         </EntityType>
         <EntityType Name="Make">
           <Key>
@@ -153,6 +205,7 @@
           <Property Name="sold" Type="Boolean" />
           <Property Name="year" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Model" Relationship="Self.FK_VEHICLE_MODEL" FromRole="Vehicle" ToRole="Model" />
+          <NavigationProperty Name="Transactions" Relationship="csc440GroupProjectModel.fk_Transaction_Vehicle1" FromRole="Vehicle" ToRole="Transaction" />
         </EntityType>
         <Association Name="FK_MODEL_MAKE">
           <End Role="Make" Type="Self.Make" Multiplicity="1" />
@@ -184,7 +237,52 @@
             <End Role="Model" EntitySet="Models" />
             <End Role="Vehicle" EntitySet="Vehicles" />
           </AssociationSet>
+          <EntitySet Name="Transactions" EntityType="csc440GroupProjectModel.Transaction" />
+          <AssociationSet Name="fk_Transaction_Customer1" Association="csc440GroupProjectModel.fk_Transaction_Customer1">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Transaction_Vehicle1" Association="csc440GroupProjectModel.fk_Transaction_Vehicle1">
+            <End Role="Vehicle" EntitySet="Vehicles" />
+            <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="Vehicle_id" />
+            <PropertyRef Name="Customer_id" />
+          </Key>
+          <Property Name="date" Type="DateTime" />
+          <Property Name="totalCost" Type="Single" />
+          <Property Name="Vehicle_id" Type="Int32" Nullable="false" />
+          <Property Name="Customer_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="csc440GroupProjectModel.fk_Transaction_Customer1" FromRole="Transaction" ToRole="Customer" />
+          <NavigationProperty Name="Vehicle" Relationship="csc440GroupProjectModel.fk_Transaction_Vehicle1" FromRole="Transaction" ToRole="Vehicle" />
+        </EntityType>
+        <Association Name="fk_Transaction_Customer1">
+          <End Type="csc440GroupProjectModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="csc440GroupProjectModel.Transaction" Role="Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="Customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Transaction_Vehicle1">
+          <End Type="csc440GroupProjectModel.Vehicle" Role="Vehicle" Multiplicity="1" />
+          <End Type="csc440GroupProjectModel.Transaction" Role="Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicle">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="Vehicle_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -260,6 +358,16 @@
               <ScalarProperty Name="id" ColumnName="id" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Transactions">
+            <EntityTypeMapping TypeName="csc440GroupProjectModel.Transaction">
+              <MappingFragment StoreEntitySet="Transaction">
+                <ScalarProperty Name="Customer_id" ColumnName="Customer_id" />
+                <ScalarProperty Name="Vehicle_id" ColumnName="Vehicle_id" />
+                <ScalarProperty Name="totalCost" ColumnName="totalCost" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

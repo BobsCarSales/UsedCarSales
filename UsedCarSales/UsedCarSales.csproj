@@ -141,6 +141,9 @@
     <Compile Include="SellVehicleForm.Designer.cs">
       <DependentUpon>SellVehicleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Transaction.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Vehicle.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>

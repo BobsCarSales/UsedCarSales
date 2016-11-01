@@ -30,5 +30,6 @@ namespace UsedCarSales
         public virtual DbSet<Model> Models { get; set; }
         public virtual DbSet<Promotion> Promotions { get; set; }
         public virtual DbSet<Vehicle> Vehicles { get; set; }
+        public virtual DbSet<Transaction> Transactions { get; set; }
     }
 }
