@@ -14,11 +14,19 @@ namespace UsedCarSales
     
     public partial class Vehicle
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Vehicle()
+        {
+            this.Transactions = new HashSet<Transaction>();
+        }
+    
         public int id { get; set; }
         public Nullable<bool> used { get; set; }
         public Nullable<bool> sold { get; set; }
         public int year { get; set; }
     
         public virtual Model Model { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }

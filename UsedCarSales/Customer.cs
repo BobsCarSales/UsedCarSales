@@ -14,6 +14,12 @@ namespace UsedCarSales
     
     public partial class Customer
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Customer()
+        {
+            this.Transactions = new HashSet<Transaction>();
+        }
+    
         public int id { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
@@ -21,5 +27,8 @@ namespace UsedCarSales
         public string state { get; set; }
         public string zipcode { get; set; }
         public string phoneNumber { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }
