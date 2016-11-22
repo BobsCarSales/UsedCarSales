@@ -1,6 +1,6 @@
 ﻿namespace UsedCarSales
 {
-    partial class SellVehicleForm
+    partial class TransactionForm
     {
         /// <summary>
         /// Required designer variable.

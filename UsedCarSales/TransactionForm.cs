@@ -10,11 +10,14 @@ using System.Windows.Forms;
 
 namespace UsedCarSales
 {
-    public partial class SellVehicleForm : Form
+    public partial class TransactionForm : Form
     {
-        public SellVehicleForm()
+        Vehicle currentVehicle;
+
+        public TransactionForm(Vehicle vehicle)
         {
             InitializeComponent();
+            this.currentVehicle = vehicle;
         }
     }
 }

@@ -43,6 +43,7 @@
             this.yearLabel = new System.Windows.Forms.Label();
             this.yearTextBox = new System.Windows.Forms.TextBox();
             this.allVehiclesButton = new System.Windows.Forms.Button();
+            this.sellVehicleButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // addVehicleButton
@@ -168,7 +169,7 @@
             this.vehiclesListBox.Location = new System.Drawing.Point(12, 108);
             this.vehiclesListBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.vehiclesListBox.Name = "vehiclesListBox";
-            this.vehiclesListBox.Size = new System.Drawing.Size(381, 228);
+            this.vehiclesListBox.Size = new System.Drawing.Size(381, 276);
             this.vehiclesListBox.TabIndex = 13;
             // 
             // yearLabel
@@ -197,11 +198,22 @@
             this.allVehiclesButton.UseVisualStyleBackColor = true;
             this.allVehiclesButton.Click += new System.EventHandler(this.allVehiclesButton_Click);
             // 
+            // sellVehicleButton
+            // 
+            this.sellVehicleButton.Location = new System.Drawing.Point(428, 342);
+            this.sellVehicleButton.Name = "sellVehicleButton";
+            this.sellVehicleButton.Size = new System.Drawing.Size(125, 50);
+            this.sellVehicleButton.TabIndex = 17;
+            this.sellVehicleButton.Text = "Sell Vehicle";
+            this.sellVehicleButton.UseVisualStyleBackColor = true;
+            this.sellVehicleButton.Click += new System.EventHandler(this.sellVehicleButton_Click);
+            // 
             // VehiclesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(565, 347);
+            this.ClientSize = new System.Drawing.Size(565, 400);
+            this.Controls.Add(this.sellVehicleButton);
             this.Controls.Add(this.allVehiclesButton);
             this.Controls.Add(this.yearTextBox);
             this.Controls.Add(this.yearLabel);
@@ -242,5 +254,6 @@
         private System.Windows.Forms.Label yearLabel;
         private System.Windows.Forms.TextBox yearTextBox;
         private System.Windows.Forms.Button allVehiclesButton;
+        private System.Windows.Forms.Button sellVehicleButton;
     }
 }

@@ -37,27 +37,31 @@ namespace UsedCarSales
             removeVehicleButton.Enabled = false;
 
             //when a vehicle is selected or deselected, the edit vehicle button needs to be enabled or disabled
-            this.vehiclesListBox.SelectedValueChanged += new System.EventHandler(initializeButtons);
+            vehiclesListBox.SelectedValueChanged += new System.EventHandler(changeButtonEnabledValues);
         }
         
-        private void initializeButtons(object sender, System.EventArgs e)
-        {
-            changeButtonEnabledValues();
-        }
-
-        private void changeButtonEnabledValues()
+        private void changeButtonEnabledValues(object sender = null, System.EventArgs e = null)
         {
             if (vehiclesListBox.SelectedItem == null)
             {
                 editVehicleButton.Enabled = false;
                 viewVehicleButton.Enabled = false;
                 removeVehicleButton.Enabled = false;
+                sellVehicleButton.Enabled = false;
             }
             else
             {
                 editVehicleButton.Enabled = true;
                 viewVehicleButton.Enabled = true;
                 removeVehicleButton.Enabled = true;
+
+                if( ((Vehicle) vehiclesListBox.SelectedItem).sold == true)
+                {
+                    sellVehicleButton.Enabled = false;
+                } else
+                {
+                    sellVehicleButton.Enabled = true;
+                }
             }
         }
 
@@ -171,6 +175,16 @@ namespace UsedCarSales
             {
                 ViewVehicleForm viewVehicleForm = new ViewVehicleForm((Vehicle)vehiclesListBox.SelectedItem);
                 viewVehicleForm.Show();
+            }
+        }
+
+        private void sellVehicleButton_Click(object sender, EventArgs e)
+        {
+            Vehicle selectedVehicle = (Vehicle) vehiclesListBox.SelectedItem;
+            if (selectedVehicle != null && selectedVehicle.sold != true)
+            {
+                TransactionForm sellVehicleForm = new TransactionForm(selectedVehicle);
+                sellVehicleForm.Show();
             }
         }
     }
