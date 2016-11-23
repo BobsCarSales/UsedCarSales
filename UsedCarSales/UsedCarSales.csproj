@@ -185,6 +185,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="TransactionForm.resx">
+      <DependentUpon>TransactionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VehiclesForm.resx">
       <DependentUpon>VehiclesForm.cs</DependentUpon>
     </EmbeddedResource>

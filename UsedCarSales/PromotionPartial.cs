@@ -10,7 +10,7 @@ namespace UsedCarSales
     {
         public override String ToString()
         {
-            return (discountAmount + " - " + Make.id);
+            return (Make.id + ": " + discountAmount + "% off");
         }
     }
 }

@@ -17,45 +17,29 @@ namespace UsedCarSales
         public VehiclesForm()
         {
             InitializeComponent();
+            
+            this.makeDropDownBox.SelectedValueChanged += new System.EventHandler(loadModels); //reload models when a new make is selected
+            this.vehiclesListBox.SelectedValueChanged += new System.EventHandler(changeButtonEnabledValues); //when a vehicle is selected or deselected, the edit vehicle button needs to be enabled or disabled
 
-            initializeDropDowns();
-            initializeVehicleListBox();
-            initializeMakes();
-        }
-
-        private void initializeDropDowns()
-        {
-            // Associate the event-handling method with the 
-            // SelectedIndexChanged event.
-            this.makeDropDownBox.SelectedValueChanged += new System.EventHandler(loadModels);
-        }
-
-        private void initializeVehicleListBox()
-        {
             viewVehicleButton.Enabled = false;
             editVehicleButton.Enabled = false;
             removeVehicleButton.Enabled = false;
 
-            //when a vehicle is selected or deselected, the edit vehicle button needs to be enabled or disabled
-            vehiclesListBox.SelectedValueChanged += new System.EventHandler(changeButtonEnabledValues);
+            initializeMakes();
         }
         
         private void changeButtonEnabledValues(object sender = null, System.EventArgs e = null)
         {
-            if (vehiclesListBox.SelectedItem == null)
-            {
-                editVehicleButton.Enabled = false;
-                viewVehicleButton.Enabled = false;
-                removeVehicleButton.Enabled = false;
-                sellVehicleButton.Enabled = false;
-            }
-            else
-            {
-                editVehicleButton.Enabled = true;
-                viewVehicleButton.Enabled = true;
-                removeVehicleButton.Enabled = true;
+            Boolean enabled = (vehiclesListBox.SelectedItem == null) ? false : true;
 
-                if( ((Vehicle) vehiclesListBox.SelectedItem).sold == true)
+            editVehicleButton.Enabled = enabled;
+            viewVehicleButton.Enabled = enabled;
+            removeVehicleButton.Enabled = enabled;
+
+            Vehicle vehicle = (Vehicle) vehiclesListBox.SelectedItem;
+            if(vehicle != null)
+            {
+                if(vehicle.sold == true)
                 {
                     sellVehicleButton.Enabled = false;
                 } else
