@@ -14,6 +14,7 @@ namespace UsedCarSales
     public partial class TransactionForm : Form
     {
         Vehicle currentVehicle;
+        int defaultLabelPosition;
 
         public TransactionForm(Vehicle vehicle)
         {
@@ -24,14 +25,20 @@ namespace UsedCarSales
 
             //when promotion changes, final price should be re-evaluated
             this.promotionComboBox.SelectedValueChanged += new System.EventHandler(applyPromotion);
+
+            //save the default x position and num of digits of the price labels. we'll be moving them back and forth
+            defaultLabelPosition = fullPriceValueLabel.Location.X;
+
+            fullPriceValueLabel.Text = "$" + currentVehicle.price.ToString();
+            adjustedPriceValueLabel.Text = "$" + currentVehicle.price.ToString();
+            updatePriceLabelLocations();
         }
 
-        //will only be called once when the VehiclesFrom loads
+        //TODO: A PROMOTION SHOULD NOT BE SELECTED WHEN THE FORM LOADS
         private void initializePromotions()
         {
+            //TODO: ONLY LOAD PROMOTIONS IF THEIR MAKE MATCHES THE CURRENT VEHICLE MAKE
             List<Promotion> allPromotions = PromotionDAO.GetAllPromotions();
-
-            //TODO: this will need to be changed
             promotionComboBox.DataSource = allPromotions;
         }
 
@@ -41,10 +48,24 @@ namespace UsedCarSales
             if(selectedPromotion != null)
             {
                 Decimal discountPercentage = (Decimal) selectedPromotion.discountAmount / 100;
+                Decimal finalPrice = currentVehicle.price - (currentVehicle.price * discountPercentage);
+                
+                adjustedPriceValueLabel.Text = "$" + Decimal.Round(finalPrice, 2);
 
-                //Decimal vehiclePrice = Decimal.parsek
-                //Decimal finalPrice = (Decimal)currentVehicle.price * discountPercentage;
+            } else
+            {
+                adjustedPriceValueLabel.Text = "$" + currentVehicle.price.ToString();
             }
+
+            updatePriceLabelLocations();
+        }
+
+        private void updatePriceLabelLocations()
+        {
+            fullPriceValueLabel.Location = new Point(defaultLabelPosition - (3 * fullPriceValueLabel.Text.ToString().Length - 1), //subtracting 1 for the decimal place
+                                                    fullPriceValueLabel.Location.Y);
+            adjustedPriceValueLabel.Location = new Point(defaultLabelPosition - (3 * adjustedPriceValueLabel.Text.ToString().Length - 1), //subtracting 1 for the decimal place
+                                                    adjustedPriceValueLabel.Location.Y);
         }
 
         //TODO: wish this wasn't here

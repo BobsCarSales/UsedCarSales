@@ -34,11 +34,10 @@ namespace UsedCarSales
             makeDropDownBox.DisplayMember = "Id";
             makeDropDownBox.ValueMember = "Id";
             makeDropDownBox.DataSource = makes;
-
             if(currentPromotion != null)
             {
                 if(currentPromotion.Make != null) { makeDropDownBox.SelectedItem = currentPromotion.Make; }
-                if(currentPromotion.discountAmount != null) { discountAmountTextBox.Text = currentPromotion.discountAmount.ToString(); }
+                discountAmountTextBox.Text = currentPromotion.discountAmount.ToString();
             }
         }
 
@@ -50,7 +49,7 @@ namespace UsedCarSales
                 promotion.Make = (Make)makeDropDownBox.SelectedItem;
                 promotion.discountAmount = Int32.Parse(discountAmountTextBox.Text);
 
-                if(promotion.Make != null && promotion.discountAmount != null)
+                if(promotion.Make != null && promotion.discountAmount != 0)
                 {
                     PromotionDAO.AddPromotion(promotion);
                     this.Close();
@@ -65,7 +64,7 @@ namespace UsedCarSales
                 currentPromotion.Make = (Make)makeDropDownBox.SelectedItem;
                 currentPromotion.discountAmount = Int32.Parse(discountAmountTextBox.Text);
 
-                if (currentPromotion.Make != null && currentPromotion.discountAmount != null)
+                if (currentPromotion.Make != null && currentPromotion.discountAmount != 0)
                 {
                     PromotionDAO.EditPromotion(currentPromotion);
                     this.Close();

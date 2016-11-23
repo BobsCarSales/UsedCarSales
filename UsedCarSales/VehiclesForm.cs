@@ -24,6 +24,7 @@ namespace UsedCarSales
             viewVehicleButton.Enabled = false;
             editVehicleButton.Enabled = false;
             removeVehicleButton.Enabled = false;
+            sellVehicleButton.Enabled = false;
 
             initializeMakes();
         }
