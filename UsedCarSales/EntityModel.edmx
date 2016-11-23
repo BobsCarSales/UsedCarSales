@@ -35,11 +35,9 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="discountAmount" Type="float" />
+          <Property Name="discountAmount" Type="float" Nullable="false" />
           <Property Name="make" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'def.csc440GroupProject.Transaction' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Transaction">
           <Key>
             <PropertyRef Name="Vehicle_id" />
@@ -126,15 +124,8 @@ warning 6002: The table/view 'def.csc440GroupProject.Transaction' does not have 
           <EntitySet Name="Make" EntityType="Self.Make" Schema="csc440GroupProject" store:Type="Tables" />
           <EntitySet Name="Model" EntityType="Self.Model" Schema="csc440GroupProject" store:Type="Tables" />
           <EntitySet Name="Promotion" EntityType="Self.Promotion" Schema="csc440GroupProject" store:Type="Tables" />
+          <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="csc440GroupProject" store:Type="Tables" />
           <EntitySet Name="Vehicle" EntityType="Self.Vehicle" Schema="csc440GroupProject" store:Type="Tables" />
-          <EntitySet Name="Transaction" EntityType="Self.Transaction" store:Type="Tables" store:Schema="csc440GroupProject">
-            <DefiningQuery>SELECT
-`Transaction`.`date`, 
-`Transaction`.`totalCost`, 
-`Transaction`.`Vehicle_id`, 
-`Transaction`.`Customer_id`
-FROM `Transaction` AS `Transaction`</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_MODEL_MAKE" Association="Self.FK_MODEL_MAKE">
             <End Role="Make" EntitySet="Make" />
             <End Role="Model" EntitySet="Model" />
@@ -194,7 +185,7 @@ FROM `Transaction` AS `Transaction`</DefiningQuery>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="discountAmount" Type="Single" />
+          <Property Name="discountAmount" Type="Single" Nullable="false" />
           <NavigationProperty Name="Make" Relationship="Self.FK_promotion_make" FromRole="Promotion" ToRole="Make" />
         </EntityType>
         <EntityType Name="Vehicle">

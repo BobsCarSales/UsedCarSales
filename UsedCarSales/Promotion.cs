@@ -15,7 +15,7 @@ namespace UsedCarSales
     public partial class Promotion
     {
         public int id { get; set; }
-        public Nullable<float> discountAmount { get; set; }
+        public float discountAmount { get; set; }
     
         public virtual Make Make { get; set; }
     }

@@ -8,6 +8,8 @@ namespace UsedCarSales.DataAccessObjects
 {
     public static class VehicleDAO
     {
+        //TODO: need to be checking for null values where corresponding columns are nOT NULL
+
         public static List<Vehicle> GetAllVehicles()
         {
             return DatabaseContext.dbContext.Vehicles.ToList();

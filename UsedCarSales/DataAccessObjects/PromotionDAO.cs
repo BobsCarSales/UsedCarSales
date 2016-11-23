@@ -8,6 +8,8 @@ namespace UsedCarSales.DataAccessObjects
 {
     class PromotionDAO
     {
+        //TODO: need to be checking for null values where corresponding columns are nOT NULL
+
         public static List<Promotion> GetAllPromotions()
         {
             return DatabaseContext.dbContext.Promotions.ToList();
