@@ -59,6 +59,7 @@ warning 6002: The table/view 'def.csc440GroupProject.Transaction' does not have 
           <Property Name="sold" Type="bool" />
           <Property Name="model" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="year" Type="int" Nullable="false" />
+          <Property Name="price" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
         <Association Name="FK_MODEL_MAKE">
           <End Role="Make" Type="Self.Make" Multiplicity="1" />
@@ -206,6 +207,7 @@ FROM `Transaction` AS `Transaction`</DefiningQuery>
           <Property Name="year" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Model" Relationship="Self.FK_VEHICLE_MODEL" FromRole="Vehicle" ToRole="Model" />
           <NavigationProperty Name="Transactions" Relationship="csc440GroupProjectModel.fk_Transaction_Vehicle1" FromRole="Vehicle" ToRole="Transaction" />
+          <Property Name="price" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_MODEL_MAKE">
           <End Role="Make" Type="Self.Make" Multiplicity="1" />
@@ -327,6 +329,7 @@ FROM `Transaction` AS `Transaction`</DefiningQuery>
           <EntitySetMapping Name="Vehicles">
             <EntityTypeMapping TypeName="csc440GroupProjectModel.Vehicle">
               <MappingFragment StoreEntitySet="Vehicle">
+                <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="used" ColumnName="used" />
                 <ScalarProperty Name="sold" ColumnName="sold" />

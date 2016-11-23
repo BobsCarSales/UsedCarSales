@@ -10,7 +10,7 @@ namespace UsedCarSales
     {
         public override String ToString()
         {
-            string ret = (year + " " + Model.Make.id + " " + Model.id);
+            string ret = (year + " " + Model.Make.id + " " + Model.id + " - $" + price);
             
             if(this.sold == true)
             {
