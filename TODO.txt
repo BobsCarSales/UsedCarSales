@@ -1,0 +1,2 @@
+Need to check for null values before adding new objects when the column is NOT NULL in the database
+Probably need to add forms adding models and makes if we have time -- will likely need to update the documentation
