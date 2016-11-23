@@ -24,7 +24,7 @@ namespace UsedCarSales
         public Nullable<bool> used { get; set; }
         public Nullable<bool> sold { get; set; }
         public int year { get; set; }
-        public string price { get; set; }
+        public decimal price { get; set; }
     
         public virtual Model Model { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

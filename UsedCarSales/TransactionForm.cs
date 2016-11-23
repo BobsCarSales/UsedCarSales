@@ -40,7 +40,10 @@ namespace UsedCarSales
             Promotion selectedPromotion = (Promotion)promotionComboBox.SelectedItem;
             if(selectedPromotion != null)
             {
+                Decimal discountPercentage = (Decimal) selectedPromotion.discountAmount / 100;
 
+                //Decimal vehiclePrice = Decimal.parsek
+                //Decimal finalPrice = (Decimal)currentVehicle.price * discountPercentage;
             }
         }
 
