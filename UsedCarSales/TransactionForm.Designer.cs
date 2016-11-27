@@ -227,6 +227,7 @@
             this.cancelButton.TabIndex = 20;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // makeSaleButton
             // 
@@ -236,6 +237,7 @@
             this.makeSaleButton.TabIndex = 21;
             this.makeSaleButton.Text = "Make Sale";
             this.makeSaleButton.UseVisualStyleBackColor = true;
+            this.makeSaleButton.Click += new System.EventHandler(this.makeSaleButton_Click);
             // 
             // TransactionForm
             // 

@@ -37,7 +37,9 @@ namespace UsedCarSales
         private void initializePromotions()
         {
             //TODO: ONLY LOAD PROMOTIONS IF THEIR MAKE MATCHES THE CURRENT VEHICLE MAKE
-            List<Promotion> allPromotions = PromotionDAO.GetPromotionsByMake(currentVehicle.Model.Make);
+            List<Promotion> allPromotions = new List<Promotion>();
+            allPromotions.Add(new Promotion());
+            allPromotions.AddRange(PromotionDAO.GetPromotionsByMake(currentVehicle.Model.Make));
             promotionComboBox.DataSource = allPromotions;
         }
 
@@ -71,6 +73,47 @@ namespace UsedCarSales
         private void finalPriceLabel_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void makeSaleButton_Click(object sender, EventArgs e)
+        {
+            //if(firstNameTextBox.Text.Equals("")
+            //    || lastNameTextBox.Text.Equals("")
+            //    || addressTextBox.Text.Equals("")
+            //    || stateTextBox.Text.Equals("")
+            //    || zipCodeTextBox.Text.Equals("")
+            //    || phoneTextBox.Text.Equals("")) {
+            //    //show error message
+            //    Console.WriteLine("ERROR!");
+            //} else
+            //{
+                Customer customer = new Customer();
+                customer.firstName = firstNameTextBox.Text;
+                customer.lastName = lastNameTextBox.Text;
+                customer.streetAddress = addressTextBox.Text;
+                customer.state = stateTextBox.Text;
+                customer.zipcode = zipCodeTextBox.Text;
+                customer.phoneNumber = phoneTextBox.Text;
+
+                Transaction transaction = new Transaction();
+                transaction.Customer = customer;
+                transaction.Vehicle = currentVehicle;
+                //TODO: need code for setting vehicle to sold and any other work that goes along with that
+                //transaction.date = DateTime.Now;
+
+                //TODO: catch errors from this
+                Decimal totalCost = Decimal.Parse(adjustedPriceValueLabel.Text);
+                Console.WriteLine();
+                //float totalCost = float.Parse(adjustedPriceValueLabel.Text);
+                //transaction.totalCost = totalCost;
+
+                //TransactionDAO.SaveTransaction(transaction);
+            //}
         }
     }
 }

@@ -95,6 +95,7 @@
     <Compile Include="DataAccessObjects\MakeDAO.cs" />
     <Compile Include="DataAccessObjects\ModelDAO.cs" />
     <Compile Include="DataAccessObjects\PromotionDAO.cs" />
+    <Compile Include="DataAccessObjects\TransactionDAO.cs" />
     <Compile Include="DataAccessObjects\VehicleDAO.cs" />
     <Compile Include="EntityModel.Context.cs">
       <AutoGen>True</AutoGen>
