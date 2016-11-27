@@ -13,13 +13,15 @@ namespace UsedCarSales
 {
     public partial class TransactionForm : Form
     {
+        VehiclesForm parentForm;
         Vehicle currentVehicle;
         int defaultLabelPosition;
 
-        public TransactionForm(Vehicle vehicle)
+        public TransactionForm(Vehicle vehicle, VehiclesForm parentForm)
         {
             InitializeComponent();
 
+            this.parentForm = parentForm;
             this.currentVehicle = vehicle;
             initializePromotions();
 
@@ -82,16 +84,16 @@ namespace UsedCarSales
 
         private void makeSaleButton_Click(object sender, EventArgs e)
         {
-            //if(firstNameTextBox.Text.Equals("")
-            //    || lastNameTextBox.Text.Equals("")
-            //    || addressTextBox.Text.Equals("")
-            //    || stateTextBox.Text.Equals("")
-            //    || zipCodeTextBox.Text.Equals("")
-            //    || phoneTextBox.Text.Equals("")) {
-            //    //show error message
-            //    Console.WriteLine("ERROR!");
-            //} else
-            //{
+            if (firstNameTextBox.Text.Equals("")
+                || lastNameTextBox.Text.Equals("")
+                || addressTextBox.Text.Equals("")
+                || stateTextBox.Text.Equals("")
+                || zipCodeTextBox.Text.Equals("")
+                || phoneTextBox.Text.Equals(""))
+            {
+                //show error message
+                errorOnForm();
+            } else { 
                 Customer customer = new Customer();
                 customer.firstName = firstNameTextBox.Text;
                 customer.lastName = lastNameTextBox.Text;
@@ -104,16 +106,66 @@ namespace UsedCarSales
                 transaction.Customer = customer;
                 transaction.Vehicle = currentVehicle;
                 //TODO: need code for setting vehicle to sold and any other work that goes along with that
-                //transaction.date = DateTime.Now;
+                transaction.date = DateTime.Now;
+
+                //get rid of the $ character from the beginning of the string
+                String totalCostString = adjustedPriceValueLabel.Text;
+                totalCostString = totalCostString.Substring(1);
 
                 //TODO: catch errors from this
-                Decimal totalCost = Decimal.Parse(adjustedPriceValueLabel.Text);
-                Console.WriteLine();
-                //float totalCost = float.Parse(adjustedPriceValueLabel.Text);
-                //transaction.totalCost = totalCost;
+                Decimal totalCost = Decimal.Parse(totalCostString);
+                transaction.totalCost = Decimal.Round(totalCost, 2);
 
-                //TransactionDAO.SaveTransaction(transaction);
-            //}
+                confirmSale(transaction);
+            }
+        }
+
+        private void confirmSale(Transaction transaction)
+        {
+            var confirmResult = MessageBox.Show("Are you sure you want to make this sale?\n" + currentVehicle + "\nFinal Price: $" + transaction.totalCost, "Confirm Sale", MessageBoxButtons.YesNo);
+
+            if(confirmResult == DialogResult.Yes)
+            {
+                currentVehicle.sold = true;
+                TransactionDAO.SaveTransaction(transaction);
+
+                //update the list of vehicles in the parent form so that it shows that this car has been sold
+                parentForm.UpdateVehiclesList();
+
+                Console.WriteLine("Transaction Completed");
+                this.Close();
+            }
+        }
+
+        private void errorOnForm()
+        {
+            String errorMessage = "";
+            if (firstNameTextBox.Text.Equals(""))
+            {
+                errorMessage += "First name field is empty\n";
+            }
+            if (lastNameTextBox.Text.Equals(""))
+            {
+                errorMessage += "Last name field is empty\n";
+            }
+            if (addressTextBox.Text.Equals(""))
+            {
+                errorMessage += "Address field is empty\n";
+            }
+            if (stateTextBox.Text.Equals(""))
+            {
+                errorMessage += "State field is empty\n";
+            }
+            if (zipCodeTextBox.Text.Equals(""))
+            {
+                errorMessage += "Zipcode field is empty\n";
+            }
+            if (phoneTextBox.Text.Equals(""))
+            {
+                errorMessage += "Phone field is empty\n";
+            }
+
+            var confirmResult = MessageBox.Show(errorMessage, "Error Validating Customer Information", MessageBoxButtons.OK);
         }
     }
 }

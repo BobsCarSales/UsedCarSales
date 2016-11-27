@@ -28,7 +28,19 @@ namespace UsedCarSales
 
             initializeMakes();
         }
-        
+
+        public void UpdateVehiclesList()
+        {
+            List<Vehicle> newVehiclesList = new List<Vehicle>();
+            foreach (Vehicle vehicle in vehicles)
+            {
+                List<Vehicle> results = VehicleDAO.SearchVehicles(vehicle);
+                newVehiclesList.AddRange(results); ;
+            }
+
+            updateVehiclesComboBox(newVehiclesList);
+        }
+
         private void changeButtonEnabledValues(object sender = null, System.EventArgs e = null)
         {
             Boolean enabled = (vehiclesListBox.SelectedItem == null) ? false : true;
@@ -90,15 +102,20 @@ namespace UsedCarSales
             return itemList;
         }
 
-        private void allVehiclesButton_Click(object sender, EventArgs e)
+        private void updateVehiclesComboBox(List<Vehicle> newVehiclesList)
         {
-            vehicles = VehicleDAO.GetAllVehicles();
+            vehicles = newVehiclesList;
             vehiclesListBox.DataSource = vehicles;
 
-            if(vehicles.Count < 1)
+            if (vehicles.Count < 1)
             {
                 changeButtonEnabledValues();
             }
+        }
+
+        private void allVehiclesButton_Click(object sender, EventArgs e)
+        {
+            updateVehiclesComboBox(VehicleDAO.GetAllVehicles());
         }
 
         private void searchVehicleButton_Click(object sender, EventArgs e)
@@ -110,13 +127,7 @@ namespace UsedCarSales
             vehicle.sold = soldCheckBox.Checked;
             vehicle.year = DateUtil.HandleYearString(yearTextBox.Text.ToString());
 
-            vehicles = VehicleDAO.SearchVehicles(vehicle);
-            vehiclesListBox.DataSource = vehicles;
-
-            if(vehicles.Count < 1)
-            {
-                changeButtonEnabledValues();
-            }
+            updateVehiclesComboBox(VehicleDAO.SearchVehicles(vehicle));
         }
 
         private void addVehicleButton_Click(object sender, EventArgs e)
@@ -168,7 +179,7 @@ namespace UsedCarSales
             Vehicle selectedVehicle = (Vehicle) vehiclesListBox.SelectedItem;
             if (selectedVehicle != null && selectedVehicle.sold != true)
             {
-                TransactionForm sellVehicleForm = new TransactionForm(selectedVehicle);
+                TransactionForm sellVehicleForm = new TransactionForm(selectedVehicle, this);
                 sellVehicleForm.Show();
             }
         }
