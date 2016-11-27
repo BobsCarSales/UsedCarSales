@@ -19,9 +19,9 @@ namespace UsedCarSales
         public TransactionForm(Vehicle vehicle)
         {
             InitializeComponent();
-            initializePromotions();
 
             this.currentVehicle = vehicle;
+            initializePromotions();
 
             //when promotion changes, final price should be re-evaluated
             this.promotionComboBox.SelectedValueChanged += new System.EventHandler(applyPromotion);
@@ -30,15 +30,14 @@ namespace UsedCarSales
             defaultLabelPosition = fullPriceValueLabel.Location.X;
 
             fullPriceValueLabel.Text = "$" + currentVehicle.price.ToString();
-            adjustedPriceValueLabel.Text = "$" + currentVehicle.price.ToString();
-            updatePriceLabelLocations();
+            applyPromotion();
         }
 
         //TODO: A PROMOTION SHOULD NOT BE SELECTED WHEN THE FORM LOADS
         private void initializePromotions()
         {
             //TODO: ONLY LOAD PROMOTIONS IF THEIR MAKE MATCHES THE CURRENT VEHICLE MAKE
-            List<Promotion> allPromotions = PromotionDAO.GetAllPromotions();
+            List<Promotion> allPromotions = PromotionDAO.GetPromotionsByMake(currentVehicle.Model.Make);
             promotionComboBox.DataSource = allPromotions;
         }
 
