@@ -43,8 +43,8 @@
             <PropertyRef Name="Vehicle_id" />
             <PropertyRef Name="Customer_id" />
           </Key>
-          <Property Name="date" Type="date" />
-          <Property Name="totalCost" Type="float" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="totalCost" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="Vehicle_id" Type="int" Nullable="false" />
           <Property Name="Customer_id" Type="int" Nullable="false" />
         </EntityType>
@@ -245,8 +245,8 @@
             <PropertyRef Name="Vehicle_id" />
             <PropertyRef Name="Customer_id" />
           </Key>
-          <Property Name="date" Type="DateTime" />
-          <Property Name="totalCost" Type="Single" />
+          <Property Name="date" Type="DateTime" Nullable="false" />
+          <Property Name="totalCost" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="Vehicle_id" Type="Int32" Nullable="false" />
           <Property Name="Customer_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="csc440GroupProjectModel.fk_Transaction_Customer1" FromRole="Transaction" ToRole="Customer" />

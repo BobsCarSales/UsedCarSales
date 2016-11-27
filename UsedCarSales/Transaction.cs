@@ -14,8 +14,8 @@ namespace UsedCarSales
     
     public partial class Transaction
     {
-        public Nullable<System.DateTime> date { get; set; }
-        public Nullable<float> totalCost { get; set; }
+        public System.DateTime date { get; set; }
+        public decimal totalCost { get; set; }
         public int Vehicle_id { get; set; }
         public int Customer_id { get; set; }
     
