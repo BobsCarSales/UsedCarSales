@@ -12,11 +12,13 @@ namespace UsedCarSales
 
         Vehicle CurrentVehicle { get; set; }
         int mode;
+        Form parentForm;
 
-        public AddEditVehicleForm(Vehicle vehicle, int mode, List<Make> makes)
+        public AddEditVehicleForm(Vehicle vehicle, int mode, List<Make> makes, Form parentForm)
         {
             this.CurrentVehicle = vehicle;
             this.mode = mode;
+            this.parentForm = parentForm;
 
             InitializeComponent();
             InitializeDropDowns();
@@ -63,7 +65,12 @@ namespace UsedCarSales
                 if(vehicle.year != DateUtil.INVALID_YEAR)
                 {
                     VehicleDAO.AddVehicle(vehicle);
-                    this.Close();
+
+                    //add the new vehicle to the list so it shows when the user goes back to the VehiclesForm
+                    VehiclesForm vehiclesForm = (VehiclesForm)parentForm;
+                    vehiclesForm.vehicles.Add(vehicle);
+
+                    closeForm();
                 } else
                 {
                     MessageBox.Show("Please enter a valid year", "Invalid Year Value", MessageBoxButtons.OK);
@@ -81,7 +88,7 @@ namespace UsedCarSales
                 if (CurrentVehicle.year != DateUtil.INVALID_YEAR)
                 {
                     VehicleDAO.EditVehicle(CurrentVehicle);
-                    this.Close();
+                    closeForm();
                 }
                 else
                 {
@@ -107,6 +114,14 @@ namespace UsedCarSales
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
+            this.Close();
+        }
+
+        private void closeForm()
+        {
+            VehiclesForm vehiclesForm = (VehiclesForm)parentForm;
+            vehiclesForm.UpdateVehiclesList();
+
             this.Close();
         }
     }

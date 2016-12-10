@@ -12,7 +12,7 @@ namespace UsedCarSales
         public const int ADD_VEHICLE = 0;
         public const int EDIT_VEHICLE = 1;
 
-        List<Vehicle> vehicles = new List<Vehicle>();
+        public List<Vehicle> vehicles = new List<Vehicle>();
 
         public VehiclesForm()
         {
@@ -29,12 +29,13 @@ namespace UsedCarSales
             initializeMakes();
         }
 
+        //used to update a single vehicle in a list of already loaded vehicles without requiring the user to re-enter search terms
         public void UpdateVehiclesList()
         {
             List<Vehicle> newVehiclesList = new List<Vehicle>();
             foreach (Vehicle vehicle in vehicles)
             {
-                List<Vehicle> results = VehicleDAO.SearchVehicles(vehicle);
+                List<Vehicle> results = VehicleDAO.SearchVehicles(vehicle, null, null);
                 newVehiclesList.AddRange(results); ;
             }
 
@@ -127,12 +128,30 @@ namespace UsedCarSales
             vehicle.sold = soldCheckBox.Checked;
             vehicle.year = DateUtil.HandleYearString(yearTextBox.Text.ToString());
 
-            updateVehiclesComboBox(VehicleDAO.SearchVehicles(vehicle));
+            decimal? minPrice = getDecimalPriceFromString(minPriceTextBox.Text.ToString());
+            decimal? maxPrice = getDecimalPriceFromString(maxPriceTextBox.Text.ToString());
+
+            updateVehiclesComboBox(VehicleDAO.SearchVehicles(vehicle, minPrice, maxPrice));
+        }
+
+        private decimal? getDecimalPriceFromString(string text)
+        {
+            decimal? price = null;
+            try
+            {
+                price = decimal.Parse(text);
+            } catch
+            {
+                Console.WriteLine("Exception parsing price text box");
+                price = null;
+            }
+
+            return price;
         }
 
         private void addVehicleButton_Click(object sender, EventArgs e)
         {
-            AddEditVehicleForm addVehicleForm = new AddEditVehicleForm(null, ADD_VEHICLE, getMakesList());
+            AddEditVehicleForm addVehicleForm = new AddEditVehicleForm(null, ADD_VEHICLE, getMakesList(), this);
             addVehicleForm.Show();
         }
 
@@ -140,7 +159,7 @@ namespace UsedCarSales
         {
             if(vehiclesListBox.SelectedItem != null)
             {
-                AddEditVehicleForm editVehicleForm = new AddEditVehicleForm((Vehicle)vehiclesListBox.SelectedItem, EDIT_VEHICLE, getMakesList());
+                AddEditVehicleForm editVehicleForm = new AddEditVehicleForm((Vehicle)vehiclesListBox.SelectedItem, EDIT_VEHICLE, getMakesList(), this);
                 editVehicleForm.Show();
 
                 //reset the list of vehicles so old data doesn't hang out after we edit it

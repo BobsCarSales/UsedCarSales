@@ -44,6 +44,10 @@
             this.yearTextBox = new System.Windows.Forms.TextBox();
             this.allVehiclesButton = new System.Windows.Forms.Button();
             this.sellVehicleButton = new System.Windows.Forms.Button();
+            this.priceLabel = new System.Windows.Forms.Label();
+            this.minPriceTextBox = new System.Windows.Forms.TextBox();
+            this.maxPriceTextBox = new System.Windows.Forms.TextBox();
+            this.toLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // addVehicleButton
@@ -166,7 +170,7 @@
             // 
             this.vehiclesListBox.FormattingEnabled = true;
             this.vehiclesListBox.ItemHeight = 16;
-            this.vehiclesListBox.Location = new System.Drawing.Point(12, 108);
+            this.vehiclesListBox.Location = new System.Drawing.Point(12, 167);
             this.vehiclesListBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.vehiclesListBox.Name = "vehiclesListBox";
             this.vehiclesListBox.Size = new System.Drawing.Size(381, 276);
@@ -185,7 +189,7 @@
             // 
             this.yearTextBox.Location = new System.Drawing.Point(91, 76);
             this.yearTextBox.Name = "yearTextBox";
-            this.yearTextBox.Size = new System.Drawing.Size(78, 22);
+            this.yearTextBox.Size = new System.Drawing.Size(95, 22);
             this.yearTextBox.TabIndex = 15;
             // 
             // allVehiclesButton
@@ -208,11 +212,49 @@
             this.sellVehicleButton.UseVisualStyleBackColor = true;
             this.sellVehicleButton.Click += new System.EventHandler(this.sellVehicleButton_Click);
             // 
+            // priceLabel
+            // 
+            this.priceLabel.AutoSize = true;
+            this.priceLabel.Location = new System.Drawing.Point(20, 110);
+            this.priceLabel.Name = "priceLabel";
+            this.priceLabel.Size = new System.Drawing.Size(40, 17);
+            this.priceLabel.TabIndex = 18;
+            this.priceLabel.Text = "Price";
+            // 
+            // minPriceTextBox
+            // 
+            this.minPriceTextBox.Location = new System.Drawing.Point(91, 110);
+            this.minPriceTextBox.Name = "minPriceTextBox";
+            this.minPriceTextBox.Size = new System.Drawing.Size(95, 22);
+            this.minPriceTextBox.TabIndex = 19;
+            this.minPriceTextBox.Text = "Min";
+            // 
+            // maxPriceTextBox
+            // 
+            this.maxPriceTextBox.Location = new System.Drawing.Point(223, 110);
+            this.maxPriceTextBox.Name = "maxPriceTextBox";
+            this.maxPriceTextBox.Size = new System.Drawing.Size(99, 22);
+            this.maxPriceTextBox.TabIndex = 20;
+            this.maxPriceTextBox.Text = "Max";
+            // 
+            // toLabel
+            // 
+            this.toLabel.AutoSize = true;
+            this.toLabel.Location = new System.Drawing.Point(192, 110);
+            this.toLabel.Name = "toLabel";
+            this.toLabel.Size = new System.Drawing.Size(25, 17);
+            this.toLabel.TabIndex = 21;
+            this.toLabel.Text = "To";
+            // 
             // VehiclesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(565, 400);
+            this.ClientSize = new System.Drawing.Size(565, 454);
+            this.Controls.Add(this.toLabel);
+            this.Controls.Add(this.maxPriceTextBox);
+            this.Controls.Add(this.minPriceTextBox);
+            this.Controls.Add(this.priceLabel);
             this.Controls.Add(this.sellVehicleButton);
             this.Controls.Add(this.allVehiclesButton);
             this.Controls.Add(this.yearTextBox);
@@ -255,5 +297,9 @@
         private System.Windows.Forms.TextBox yearTextBox;
         private System.Windows.Forms.Button allVehiclesButton;
         private System.Windows.Forms.Button sellVehicleButton;
+        private System.Windows.Forms.Label priceLabel;
+        private System.Windows.Forms.TextBox minPriceTextBox;
+        private System.Windows.Forms.TextBox maxPriceTextBox;
+        private System.Windows.Forms.Label toLabel;
     }
 }
