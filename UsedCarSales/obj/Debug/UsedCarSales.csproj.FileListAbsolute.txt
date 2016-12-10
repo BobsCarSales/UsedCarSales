@@ -76,3 +76,4 @@ C:\Users\bnapi\Desktop\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.csproj.G
 C:\Users\bnapi\Desktop\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.exe
 C:\Users\bnapi\Desktop\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.pdb
 \\Mac\Home\Development\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.TransactionForm.resources
+\\Mac\Home\Development\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.csprojResolveAssemblyReference.cache

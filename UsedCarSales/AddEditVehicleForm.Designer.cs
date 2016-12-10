@@ -38,13 +38,15 @@
             this.modelDropDown = new System.Windows.Forms.ComboBox();
             this.yearLabel = new System.Windows.Forms.Label();
             this.yearTextBox = new System.Windows.Forms.TextBox();
+            this.priceLabel = new System.Windows.Forms.Label();
+            this.priceTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // usedCheckBox
             // 
             this.usedCheckBox.AutoSize = true;
             this.usedCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.usedCheckBox.Location = new System.Drawing.Point(220, 22);
+            this.usedCheckBox.Location = new System.Drawing.Point(230, 22);
             this.usedCheckBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.usedCheckBox.Name = "usedCheckBox";
             this.usedCheckBox.Size = new System.Drawing.Size(63, 21);
@@ -72,7 +74,7 @@
             // 
             // confirmButton
             // 
-            this.confirmButton.Location = new System.Drawing.Point(29, 136);
+            this.confirmButton.Location = new System.Drawing.Point(54, 158);
             this.confirmButton.Margin = new System.Windows.Forms.Padding(4);
             this.confirmButton.Name = "confirmButton";
             this.confirmButton.Size = new System.Drawing.Size(100, 28);
@@ -83,7 +85,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(171, 136);
+            this.cancelButton.Location = new System.Drawing.Point(162, 158);
             this.cancelButton.Margin = new System.Windows.Forms.Padding(4);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(100, 28);
@@ -96,7 +98,7 @@
             // 
             this.soldCheckBox.AutoSize = true;
             this.soldCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.soldCheckBox.Location = new System.Drawing.Point(225, 48);
+            this.soldCheckBox.Location = new System.Drawing.Point(235, 48);
             this.soldCheckBox.Name = "soldCheckBox";
             this.soldCheckBox.Size = new System.Drawing.Size(58, 21);
             this.soldCheckBox.TabIndex = 16;
@@ -135,11 +137,29 @@
             this.yearTextBox.Size = new System.Drawing.Size(147, 22);
             this.yearTextBox.TabIndex = 20;
             // 
+            // priceLabel
+            // 
+            this.priceLabel.AutoSize = true;
+            this.priceLabel.Location = new System.Drawing.Point(15, 127);
+            this.priceLabel.Name = "priceLabel";
+            this.priceLabel.Size = new System.Drawing.Size(40, 17);
+            this.priceLabel.TabIndex = 21;
+            this.priceLabel.Text = "Price";
+            // 
+            // priceTextBox
+            // 
+            this.priceTextBox.Location = new System.Drawing.Point(67, 127);
+            this.priceTextBox.Name = "priceTextBox";
+            this.priceTextBox.Size = new System.Drawing.Size(147, 22);
+            this.priceTextBox.TabIndex = 22;
+            // 
             // AddEditVehicleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(305, 181);
+            this.ClientSize = new System.Drawing.Size(305, 199);
+            this.Controls.Add(this.priceTextBox);
+            this.Controls.Add(this.priceLabel);
             this.Controls.Add(this.yearTextBox);
             this.Controls.Add(this.yearLabel);
             this.Controls.Add(this.modelDropDown);
@@ -170,5 +190,7 @@
         private System.Windows.Forms.ComboBox modelDropDown;
         private System.Windows.Forms.Label yearLabel;
         private System.Windows.Forms.TextBox yearTextBox;
+        private System.Windows.Forms.Label priceLabel;
+        private System.Windows.Forms.TextBox priceTextBox;
     }
 }

@@ -25,6 +25,7 @@ namespace UsedCarSales
             yearValueLabel.Text = vehicle.year.ToString();
             usedValueLabel.Text = vehicle.used.ToString();
             soldValueLabel.Text = vehicle.sold.ToString();
+            priceValueLabel.Text = vehicle.price.ToString();
         }
     }
 }

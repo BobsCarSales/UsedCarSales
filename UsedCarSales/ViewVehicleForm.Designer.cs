@@ -38,6 +38,8 @@
             this.usedValueLabel = new System.Windows.Forms.Label();
             this.soldLabel = new System.Windows.Forms.Label();
             this.makeLabel = new System.Windows.Forms.Label();
+            this.priceLabel = new System.Windows.Forms.Label();
+            this.priceValueLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // modelValueLabel
@@ -130,11 +132,31 @@
             this.makeLabel.TabIndex = 0;
             this.makeLabel.Text = "Make";
             // 
+            // priceLabel
+            // 
+            this.priceLabel.AutoSize = true;
+            this.priceLabel.Location = new System.Drawing.Point(40, 174);
+            this.priceLabel.Name = "priceLabel";
+            this.priceLabel.Size = new System.Drawing.Size(40, 17);
+            this.priceLabel.TabIndex = 10;
+            this.priceLabel.Text = "Price";
+            // 
+            // priceValueLabel
+            // 
+            this.priceValueLabel.AutoSize = true;
+            this.priceValueLabel.Location = new System.Drawing.Point(103, 174);
+            this.priceValueLabel.Name = "priceValueLabel";
+            this.priceValueLabel.Size = new System.Drawing.Size(80, 17);
+            this.priceValueLabel.TabIndex = 11;
+            this.priceValueLabel.Text = "Price Value";
+            // 
             // ViewVehicleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(219, 196);
+            this.ClientSize = new System.Drawing.Size(219, 214);
+            this.Controls.Add(this.priceValueLabel);
+            this.Controls.Add(this.priceLabel);
             this.Controls.Add(this.soldValueLabel);
             this.Controls.Add(this.soldLabel);
             this.Controls.Add(this.usedValueLabel);
@@ -164,5 +186,7 @@
         private System.Windows.Forms.Label usedValueLabel;
         private System.Windows.Forms.Label soldLabel;
         private System.Windows.Forms.Label makeLabel;
+        private System.Windows.Forms.Label priceLabel;
+        private System.Windows.Forms.Label priceValueLabel;
     }
 }

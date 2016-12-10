@@ -44,6 +44,7 @@ namespace UsedCarSales
                 if (CurrentVehicle.used != null) usedCheckBox.Checked = (bool) CurrentVehicle.used;
                 if (CurrentVehicle.sold != null) soldCheckBox.Checked = (bool) CurrentVehicle.sold;
                 if (CurrentVehicle.year != -1) yearTextBox.Text = CurrentVehicle.year.ToString();
+                if (CurrentVehicle.price != -1) priceTextBox.Text = CurrentVehicle.price.ToString(); 
             }
         }
 
@@ -56,6 +57,8 @@ namespace UsedCarSales
                 vehicle.sold = soldCheckBox.Checked;
                 vehicle.used = usedCheckBox.Checked;
                 vehicle.year = DateUtil.HandleYearString(yearTextBox.Text.ToString());
+                //TODO: we need to be checking that the price is the correct format
+                vehicle.price = Decimal.Parse(priceTextBox.Text.ToString());
 
                 if(vehicle.year != DateUtil.INVALID_YEAR)
                 {
@@ -72,6 +75,8 @@ namespace UsedCarSales
                 CurrentVehicle.sold = soldCheckBox.Checked;
                 CurrentVehicle.used = usedCheckBox.Checked;
                 CurrentVehicle.year = DateUtil.HandleYearString(yearTextBox.Text.ToString());
+                //TODO: we need to be checking that the price is the correct format
+                CurrentVehicle.price = Decimal.Parse(priceTextBox.Text.ToString());
 
                 if (CurrentVehicle.year != DateUtil.INVALID_YEAR)
                 {
