@@ -18,13 +18,15 @@ namespace UsedCarSales
 
         Promotion currentPromotion { get; set; }
         int mode;
+        PromotionsForm promotionsForm;
 
-        public AddEditPromotionForm(Promotion promotion, int mode, List<Make> makes)
+        public AddEditPromotionForm(Promotion promotion, int mode, List<Make> makes, PromotionsForm promotionsForm)
         {
             InitializeComponent();
 
             this.currentPromotion = promotion;
             this.mode = mode;
+            this.promotionsForm = promotionsForm;
 
             initializeForm(makes);
         }
@@ -52,6 +54,7 @@ namespace UsedCarSales
                 if(promotion.Make != null && promotion.discountAmount != 0)
                 {
                     PromotionDAO.AddPromotion(promotion);
+                    promotionsForm.ReloadPromotions();
                     this.Close();
                 } else
                 {
@@ -67,6 +70,7 @@ namespace UsedCarSales
                 if (currentPromotion.Make != null && currentPromotion.discountAmount != 0)
                 {
                     PromotionDAO.EditPromotion(currentPromotion);
+                    promotionsForm.ReloadPromotions();
                     this.Close();
                 }
                 else
@@ -80,6 +84,11 @@ namespace UsedCarSales
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

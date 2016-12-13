@@ -42,6 +42,17 @@ namespace UsedCarSales
             updateVehiclesComboBox(newVehiclesList);
         }
 
+        private void updateVehiclesComboBox(List<Vehicle> newVehiclesList)
+        {
+            vehicles = newVehiclesList;
+            vehiclesListBox.DataSource = vehicles;
+
+            if (vehicles.Count < 1)
+            {
+                changeButtonEnabledValues();
+            }
+        }
+
         private void changeButtonEnabledValues(object sender = null, System.EventArgs e = null)
         {
             Boolean enabled = (vehiclesListBox.SelectedItem == null) ? false : true;
@@ -101,17 +112,6 @@ namespace UsedCarSales
             }
 
             return itemList;
-        }
-
-        private void updateVehiclesComboBox(List<Vehicle> newVehiclesList)
-        {
-            vehicles = newVehiclesList;
-            vehiclesListBox.DataSource = vehicles;
-
-            if (vehicles.Count < 1)
-            {
-                changeButtonEnabledValues();
-            }
         }
 
         private void allVehiclesButton_Click(object sender, EventArgs e)

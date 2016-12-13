@@ -18,6 +18,8 @@ namespace UsedCarSales
 
         List<Promotion> promotions = new List<Promotion>();
 
+        bool isSearch = false;
+
         public PromotionsForm()
         {
             InitializeComponent();
@@ -79,8 +81,24 @@ namespace UsedCarSales
             return itemList;
         }
 
-        private void allPromotionsButton_Click(object sender, EventArgs e)
+        public void ReloadPromotions()
         {
+            //reset the list of promotions so old data doesn't hang out after we edit it
+            promotionsListBox.DataSource = null;
+
+            if (isSearch)
+            {
+                searchPromotionsButton_Click();
+            } else
+            {
+                allPromotionsButton_Click();
+            }
+        }
+
+        private void allPromotionsButton_Click(object sender = null, EventArgs e = null)
+        {
+            isSearch = false;
+
             promotions = PromotionDAO.GetAllPromotions();
             promotionsListBox.DataSource = promotions;
 
@@ -90,8 +108,10 @@ namespace UsedCarSales
             }
         }
 
-        private void searchPromotionsButton_Click(object sender, EventArgs e)
+        private void searchPromotionsButton_Click(object sender = null, EventArgs e = null)
         {
+            isSearch = true;
+
             promotions = PromotionDAO.GetPromotionsByMake( (Make)makeDropDownBox.SelectedItem );
             promotionsListBox.DataSource = promotions;
 
@@ -103,7 +123,7 @@ namespace UsedCarSales
 
         private void addPromotionsButton_Click(object sender, EventArgs e)
         {
-            AddEditPromotionForm addPromotionForm = new AddEditPromotionForm(null, ADD_PROMOTION, getMakesList());
+            AddEditPromotionForm addPromotionForm = new AddEditPromotionForm(null, ADD_PROMOTION, getMakesList(), this);
             addPromotionForm.Show();
         }
 
@@ -111,11 +131,8 @@ namespace UsedCarSales
         {
             if(promotionsListBox.SelectedItem != null)
             {
-                AddEditPromotionForm editPromotionForm = new AddEditPromotionForm((Promotion)promotionsListBox.SelectedItem, EDIT_PROMOTION, getMakesList());
+                AddEditPromotionForm editPromotionForm = new AddEditPromotionForm((Promotion)promotionsListBox.SelectedItem, EDIT_PROMOTION, getMakesList(), this);
                 editPromotionForm.Show();
-
-                //reset the list of promotions so old data doesn't hang out after we edit it
-                promotionsListBox.DataSource = null;
             }
         }
 

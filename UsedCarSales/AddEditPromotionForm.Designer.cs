@@ -34,6 +34,7 @@
             this.discountAmountTextBox = new System.Windows.Forms.TextBox();
             this.confirmButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.percentageSymbolLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // discountAmountLabel
@@ -66,7 +67,7 @@
             // 
             this.discountAmountTextBox.Location = new System.Drawing.Point(132, 50);
             this.discountAmountTextBox.Name = "discountAmountTextBox";
-            this.discountAmountTextBox.Size = new System.Drawing.Size(138, 22);
+            this.discountAmountTextBox.Size = new System.Drawing.Size(109, 22);
             this.discountAmountTextBox.TabIndex = 3;
             // 
             // confirmButton
@@ -89,11 +90,22 @@
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
+            // percentageSymbolLabel
+            // 
+            this.percentageSymbolLabel.AutoSize = true;
+            this.percentageSymbolLabel.Location = new System.Drawing.Point(247, 53);
+            this.percentageSymbolLabel.Name = "percentageSymbolLabel";
+            this.percentageSymbolLabel.Size = new System.Drawing.Size(20, 17);
+            this.percentageSymbolLabel.TabIndex = 6;
+            this.percentageSymbolLabel.Text = "%";
+            this.percentageSymbolLabel.Click += new System.EventHandler(this.label1_Click);
+            // 
             // AddEditPromotionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(282, 127);
+            this.Controls.Add(this.percentageSymbolLabel);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.confirmButton);
             this.Controls.Add(this.discountAmountTextBox);
@@ -115,5 +127,6 @@
         private System.Windows.Forms.TextBox discountAmountTextBox;
         private System.Windows.Forms.Button confirmButton;
         private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.Label percentageSymbolLabel;
     }
 }
