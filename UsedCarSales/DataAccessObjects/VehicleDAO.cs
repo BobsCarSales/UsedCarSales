@@ -63,10 +63,7 @@ namespace UsedCarSales.DataAccessObjects
 
         public static void EditVehicle(Vehicle vehicle)
         {
-            Vehicle vehicleToUpdate = DatabaseContext.dbContext.Vehicles.First(v => v.id == vehicle.id);
-
-            DatabaseContext.dbContext.Vehicles.Attach(vehicleToUpdate);
-            vehicleToUpdate = vehicle;
+            DatabaseContext.dbContext.Entry(vehicle).State = System.Data.Entity.EntityState.Modified;
             DatabaseContext.dbContext.SaveChangesAsync();
         }
     }

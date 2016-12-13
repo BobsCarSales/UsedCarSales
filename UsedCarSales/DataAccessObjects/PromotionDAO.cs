@@ -35,10 +35,7 @@ namespace UsedCarSales.DataAccessObjects
 
         public static void EditPromotion(Promotion promotion)
         {
-            Promotion promotionToUpdate = DatabaseContext.dbContext.Promotions.First(p => p.id == promotion.id);
-
-            DatabaseContext.dbContext.Promotions.Attach(promotionToUpdate);
-            promotionToUpdate = promotion;
+            DatabaseContext.dbContext.Entry(promotion).State = System.Data.Entity.EntityState.Modified;
             DatabaseContext.dbContext.SaveChangesAsync();
         }
     }

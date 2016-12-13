@@ -117,10 +117,11 @@ namespace UsedCarSales
             this.Close();
         }
 
+        //will not be called if action is cancelled -- only if a save occurs
         private void closeForm()
         {
             VehiclesForm vehiclesForm = (VehiclesForm)parentForm;
-            vehiclesForm.UpdateVehiclesList();
+            vehiclesForm.ReloadVehicles();
 
             this.Close();
         }

@@ -14,6 +14,9 @@ namespace UsedCarSales
 
         public List<Vehicle> vehicles = new List<Vehicle>();
 
+        //is the user searching for a certain vehicle or did the user load all of the vehicles at once
+        bool isSearch = false;
+
         public VehiclesForm()
         {
             InitializeComponent();
@@ -29,17 +32,19 @@ namespace UsedCarSales
             initializeMakes();
         }
 
-        //used to update a single vehicle in a list of already loaded vehicles without requiring the user to re-enter search terms
-        public void UpdateVehiclesList()
+        public void ReloadVehicles()
         {
-            List<Vehicle> newVehiclesList = new List<Vehicle>();
-            foreach (Vehicle vehicle in vehicles)
-            {
-                List<Vehicle> results = VehicleDAO.SearchVehicles(vehicle, null, null);
-                newVehiclesList.AddRange(results); ;
-            }
+            //reset the list of promotions so old data doesn't hang out after we edit it
+            vehiclesListBox.DataSource = null;
 
-            updateVehiclesComboBox(newVehiclesList);
+            if (isSearch)
+            {
+                searchVehicleButton_Click();
+            }
+            else
+            {
+                allVehiclesButton_Click();
+            }
         }
 
         private void updateVehiclesComboBox(List<Vehicle> newVehiclesList)
@@ -114,13 +119,16 @@ namespace UsedCarSales
             return itemList;
         }
 
-        private void allVehiclesButton_Click(object sender, EventArgs e)
+        private void allVehiclesButton_Click(object sender = null, EventArgs e = null)
         {
+            isSearch = false;
             updateVehiclesComboBox(VehicleDAO.GetAllVehicles());
         }
 
-        private void searchVehicleButton_Click(object sender, EventArgs e)
+        private void searchVehicleButton_Click(object sender = null, EventArgs e = null)
         {
+            isSearch = true;
+
             Vehicle vehicle = new Vehicle();
 
             vehicle.Model = (Model)modelDropDownBox.SelectedItem;
@@ -128,8 +136,17 @@ namespace UsedCarSales
             vehicle.sold = soldCheckBox.Checked;
             vehicle.year = DateUtil.HandleYearString(yearTextBox.Text.ToString());
 
-            decimal? minPrice = getDecimalPriceFromString(minPriceTextBox.Text.ToString());
-            decimal? maxPrice = getDecimalPriceFromString(maxPriceTextBox.Text.ToString());
+            decimal? minPrice = null;
+            if (!minPriceTextBox.Text.ToString().Equals("Min"))
+            {
+                minPrice = getDecimalPriceFromString(minPriceTextBox.Text.ToString());
+            }
+
+            decimal? maxPrice = null;
+            if (!maxPriceTextBox.Text.ToString().Equals("Max"))
+            {
+                maxPrice = getDecimalPriceFromString(maxPriceTextBox.Text.ToString());
+            }
 
             updateVehiclesComboBox(VehicleDAO.SearchVehicles(vehicle, minPrice, maxPrice));
         }

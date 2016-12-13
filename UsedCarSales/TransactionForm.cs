@@ -130,7 +130,7 @@ namespace UsedCarSales
                 TransactionDAO.SaveTransaction(transaction);
 
                 //update the list of vehicles in the parent form so that it shows that this car has been sold
-                parentForm.UpdateVehiclesList();
+                parentForm.ReloadVehicles();
 
                 Console.WriteLine("Transaction Completed");
                 this.Close();

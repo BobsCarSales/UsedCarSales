@@ -100,12 +100,7 @@ namespace UsedCarSales
             isSearch = false;
 
             promotions = PromotionDAO.GetAllPromotions();
-            promotionsListBox.DataSource = promotions;
-
-            if (promotions.Count < 1)
-            {
-                changeButtonEnabledValues();
-            }
+            updatePromotionsListBox(promotions);
         }
 
         private void searchPromotionsButton_Click(object sender = null, EventArgs e = null)
@@ -113,6 +108,11 @@ namespace UsedCarSales
             isSearch = true;
 
             promotions = PromotionDAO.GetPromotionsByMake( (Make)makeDropDownBox.SelectedItem );
+            updatePromotionsListBox(promotions);
+        }
+
+        private void updatePromotionsListBox(List<Promotion> promotions)
+        {
             promotionsListBox.DataSource = promotions;
 
             if (promotions.Count < 1)
