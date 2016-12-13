@@ -45,39 +45,50 @@ namespace UsedCarSales
 
         private void confirmButton_Click(object sender, EventArgs e)
         {
-            if (mode == ADD_PROMOTION)
+            int discAmt = 0;
+            try
             {
-                Promotion promotion = new Promotion();
-                promotion.Make = (Make)makeDropDownBox.SelectedItem;
-                promotion.discountAmount = Int32.Parse(discountAmountTextBox.Text);
+                discAmt = Int32.Parse(discountAmountTextBox.Text);
 
-                if(promotion.Make != null && promotion.discountAmount != 0)
+                if (mode == ADD_PROMOTION)
                 {
-                    PromotionDAO.AddPromotion(promotion);
-                    promotionsForm.ReloadPromotions();
-                    this.Close();
-                } else
+                    Promotion promotion = new Promotion();
+                    promotion.Make = (Make)makeDropDownBox.SelectedItem;
+                    promotion.discountAmount = discAmt;
+
+                    if (promotion.Make != null && promotion.discountAmount != 0 && promotion.discountAmount > 0)
+                    {
+                        PromotionDAO.AddPromotion(promotion);
+                        promotionsForm.ReloadPromotions();
+                        this.Close();
+                    }
+                    else
+                    {
+                        //TODO: should show a different error message depending on what value is null
+                        MessageBox.Show("Invalid input!", "Invalid Input", MessageBoxButtons.OK);
+                    }
+                }
+                else if (mode == EDIT_PROMOTION)
                 {
-                    //TODO: should show a different error message depending on what value is null
-                    MessageBox.Show("Invalid input!", "Invalid Input", MessageBoxButtons.OK);
+                    currentPromotion.Make = (Make)makeDropDownBox.SelectedItem;
+                    currentPromotion.discountAmount = discAmt;
+
+                    if (currentPromotion.Make != null && currentPromotion.discountAmount != 0 && currentPromotion.discountAmount > 0)
+                    {
+                        PromotionDAO.EditPromotion(currentPromotion);
+                        promotionsForm.ReloadPromotions();
+                        this.Close();
+                    }
+                    else
+                    {
+                        //TODO: should show a different error message depending on what value is null
+                        MessageBox.Show("Invalid input!", "Invalid Input", MessageBoxButtons.OK);
+                    }
                 }
             }
-            else if (mode == EDIT_PROMOTION)
+            catch
             {
-                currentPromotion.Make = (Make)makeDropDownBox.SelectedItem;
-                currentPromotion.discountAmount = Int32.Parse(discountAmountTextBox.Text);
-
-                if (currentPromotion.Make != null && currentPromotion.discountAmount != 0)
-                {
-                    PromotionDAO.EditPromotion(currentPromotion);
-                    promotionsForm.ReloadPromotions();
-                    this.Close();
-                }
-                else
-                {
-                    //TODO: should show a different error message depending on what value is null
-                    MessageBox.Show("Invalid input!", "Invalid Input", MessageBoxButtons.OK);
-                }
+                MessageBox.Show("Invalid input!", "Invalid Input", MessageBoxButtons.OK);
             }
         }
 

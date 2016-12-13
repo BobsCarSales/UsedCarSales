@@ -19,11 +19,11 @@ namespace UsedCarSales.DataAccessObjects
         {
             List<Vehicle> vehicles = new List<Vehicle>();
 
-            if(minPrice == null || minPrice < 0)
+            if(minPrice == null || minPrice < 0 || minPrice >= Decimal.MaxValue)
             {
                 minPrice = 0;
             }
-            if(maxPrice == null || maxPrice < 0)
+            if(maxPrice == null || maxPrice < 0 || maxPrice >= Decimal.MaxValue)
             {
                 maxPrice = Decimal.MaxValue;
             }

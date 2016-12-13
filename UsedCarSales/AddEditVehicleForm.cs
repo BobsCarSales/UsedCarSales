@@ -52,48 +52,63 @@ namespace UsedCarSales
 
         private void confirmButton_Click(object sender, EventArgs e)
         {
-            if (mode == ADD_VEHICLE)
+            decimal price;
+            try
             {
-                Vehicle vehicle = new Vehicle();
-                vehicle.Model = (Model)modelDropDown.SelectedItem;
-                vehicle.sold = soldCheckBox.Checked;
-                vehicle.used = usedCheckBox.Checked;
-                vehicle.year = DateUtil.HandleYearString(yearTextBox.Text.ToString());
-                //TODO: we need to be checking that the price is the correct format
-                vehicle.price = Decimal.Parse(priceTextBox.Text.ToString());
+                price = Decimal.Parse(priceTextBox.Text.ToString());
 
-                if(vehicle.year != DateUtil.INVALID_YEAR)
+                if(price > 0)
                 {
-                    VehicleDAO.AddVehicle(vehicle);
+                    if (mode == ADD_VEHICLE)
+                    {
+                        Vehicle vehicle = new Vehicle();
+                        vehicle.Model = (Model)modelDropDown.SelectedItem;
+                        vehicle.sold = soldCheckBox.Checked;
+                        vehicle.used = usedCheckBox.Checked;
+                        vehicle.year = DateUtil.HandleYearString(yearTextBox.Text.ToString());
+                        vehicle.price = price;
 
-                    //add the new vehicle to the list so it shows when the user goes back to the VehiclesForm
-                    VehiclesForm vehiclesForm = (VehiclesForm)parentForm;
-                    vehiclesForm.vehicles.Add(vehicle);
+                        if (vehicle.year != DateUtil.INVALID_YEAR)
+                        {
+                            VehicleDAO.AddVehicle(vehicle);
 
-                    closeForm();
+                            //add the new vehicle to the list so it shows when the user goes back to the VehiclesForm
+                            VehiclesForm vehiclesForm = (VehiclesForm)parentForm;
+                            vehiclesForm.vehicles.Add(vehicle);
+
+                            closeForm();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please enter a valid year", "Invalid Year Value", MessageBoxButtons.OK);
+                        }
+                    }
+                    else if (mode == EDIT_VEHICLE)
+                    {
+                        CurrentVehicle.Model = (Model)modelDropDown.SelectedItem;
+                        CurrentVehicle.sold = soldCheckBox.Checked;
+                        CurrentVehicle.used = usedCheckBox.Checked;
+                        CurrentVehicle.year = DateUtil.HandleYearString(yearTextBox.Text.ToString());
+                        CurrentVehicle.price = price;
+
+                        if (CurrentVehicle.year != DateUtil.INVALID_YEAR)
+                        {
+                            VehicleDAO.EditVehicle(CurrentVehicle);
+                            closeForm();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please enter a valid year", "Invalid Year Value", MessageBoxButtons.OK);
+                        }
+                    }
                 } else
                 {
-                    MessageBox.Show("Please enter a valid year", "Invalid Year Value", MessageBoxButtons.OK);
+                    MessageBox.Show("Invalid Price", "Invalid Price", MessageBoxButtons.OK);
                 }
             }
-            else if(mode == EDIT_VEHICLE)
+            catch
             {
-                CurrentVehicle.Model = (Model)modelDropDown.SelectedItem;
-                CurrentVehicle.sold = soldCheckBox.Checked;
-                CurrentVehicle.used = usedCheckBox.Checked;
-                CurrentVehicle.year = DateUtil.HandleYearString(yearTextBox.Text.ToString());
-                //TODO: we need to be checking that the price is the correct format
-                CurrentVehicle.price = Decimal.Parse(priceTextBox.Text.ToString());
-
-                if (CurrentVehicle.year != DateUtil.INVALID_YEAR)
-                {
-                    VehicleDAO.EditVehicle(CurrentVehicle);
-                    closeForm();
-                }
-                else
-                {
-                    MessageBox.Show("Please enter a valid year", "Invalid Year Value", MessageBoxButtons.OK);
-                }
+                MessageBox.Show("Invalid Input", "Invalid Input", MessageBoxButtons.OK);
             }
         }
 
