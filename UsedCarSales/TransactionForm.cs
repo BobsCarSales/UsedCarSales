@@ -71,12 +71,6 @@ namespace UsedCarSales
                                                     adjustedPriceValueLabel.Location.Y);
         }
 
-        //TODO: wish this wasn't here
-        private void finalPriceLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -84,16 +78,8 @@ namespace UsedCarSales
 
         private void makeSaleButton_Click(object sender, EventArgs e)
         {
-            if (firstNameTextBox.Text.Equals("")
-                || lastNameTextBox.Text.Equals("")
-                || addressTextBox.Text.Equals("")
-                || stateTextBox.Text.Equals("")
-                || zipCodeTextBox.Text.Equals("")
-                || phoneTextBox.Text.Equals(""))
-            {
-                //show error message
-                errorOnForm();
-            } else { 
+            if (!errorOnForm())
+            { 
                 Customer customer = new Customer();
                 customer.firstName = firstNameTextBox.Text;
                 customer.lastName = lastNameTextBox.Text;
@@ -137,35 +123,80 @@ namespace UsedCarSales
             }
         }
 
-        private void errorOnForm()
+        private bool errorOnForm()
         {
+            bool error = false;
+
             String errorMessage = "";
             if (firstNameTextBox.Text.Equals(""))
             {
                 errorMessage += "First name field is empty\n";
+                error = true;
             }
             if (lastNameTextBox.Text.Equals(""))
             {
                 errorMessage += "Last name field is empty\n";
+                error = true;
             }
             if (addressTextBox.Text.Equals(""))
             {
                 errorMessage += "Address field is empty\n";
+                error = true;
             }
             if (stateTextBox.Text.Equals(""))
             {
                 errorMessage += "State field is empty\n";
+                error = true;
             }
             if (zipCodeTextBox.Text.Equals(""))
             {
                 errorMessage += "Zipcode field is empty\n";
+                error = true;
             }
             if (phoneTextBox.Text.Equals(""))
             {
                 errorMessage += "Phone field is empty\n";
+                error = true;
             }
 
-            var confirmResult = MessageBox.Show(errorMessage, "Error Validating Customer Information", MessageBoxButtons.OK);
+            if(zipCodeTextBox.Text.ToString().Length != 5)
+            {
+                errorMessage += "Zip code is the wrong length\n";
+                error = true;
+            }
+
+            try
+            {
+                decimal zip = decimal.Parse(zipCodeTextBox.Text.ToString());
+            }
+            catch
+            {
+                errorMessage += "Zip code contains invalid characters\n";
+                error = true;
+            }
+
+            try
+            {
+                decimal phone = decimal.Parse(phoneTextBox.Text.ToString());
+            }
+            catch
+            {
+                errorMessage += "Phone number contains invalid characters\n";
+                error = true;
+            }
+
+            if(errorMessage.Length > 0)
+            {
+                MessageBox.Show(errorMessage, "Error Validating Customer Information", MessageBoxButtons.OK);
+            }
+
+            return error;
+        }
+
+        //TODO: wish this wasn't here
+        private void finalPriceLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
