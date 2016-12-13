@@ -70,11 +70,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddCustomerForm.cs">
+    <Compile Include="CustomerPartial.cs" />
+    <Compile Include="EditCustomerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddCustomerForm.Designer.cs">
-      <DependentUpon>AddCustomerForm.cs</DependentUpon>
+    <Compile Include="EditCustomerForm.Designer.cs">
+      <DependentUpon>EditCustomerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="AddEditPromotionForm.cs">
       <SubType>Form</SubType>
@@ -91,6 +92,13 @@
     <Compile Include="Customer.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CustomersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomersForm.Designer.cs">
+      <DependentUpon>CustomersForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccessObjects\CustomerDAO.cs" />
     <Compile Include="DataAccessObjects\DatabaseContext.cs" />
     <Compile Include="DataAccessObjects\MakeDAO.cs" />
     <Compile Include="DataAccessObjects\ModelDAO.cs" />
@@ -145,6 +153,7 @@
     <Compile Include="TransactionForm.Designer.cs">
       <DependentUpon>TransactionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TransactionPartial.cs" />
     <Compile Include="Vehicle.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
@@ -155,6 +164,12 @@
     <Compile Include="VehiclesForm.Designer.cs">
       <DependentUpon>VehiclesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewCustomerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewCustomerForm.Designer.cs">
+      <DependentUpon>ViewCustomerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewVehicleForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,14 +177,17 @@
       <DependentUpon>ViewVehicleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DateUtil.cs" />
-    <EmbeddedResource Include="AddCustomerForm.resx">
-      <DependentUpon>AddCustomerForm.cs</DependentUpon>
+    <EmbeddedResource Include="EditCustomerForm.resx">
+      <DependentUpon>EditCustomerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddEditPromotionForm.resx">
       <DependentUpon>AddEditPromotionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddEditVehicleForm.resx">
       <DependentUpon>AddEditVehicleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomersForm.resx">
+      <DependentUpon>CustomersForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HomeForm.resx">
       <DependentUpon>HomeForm.cs</DependentUpon>
@@ -191,6 +209,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="VehiclesForm.resx">
       <DependentUpon>VehiclesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewCustomerForm.resx">
+      <DependentUpon>ViewCustomerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewVehicleForm.resx">
       <DependentUpon>ViewVehicleForm.cs</DependentUpon>

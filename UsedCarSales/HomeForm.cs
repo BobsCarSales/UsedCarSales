@@ -33,5 +33,11 @@ namespace UsedCarSales
             PromotionsForm promotionForm = new PromotionsForm();
             promotionForm.Show();
         }
+
+        private void customersButton_Click(object sender, EventArgs e)
+        {
+            CustomersForm customersForm = new CustomersForm();
+            customersForm.Show();
+        }
     }
 }

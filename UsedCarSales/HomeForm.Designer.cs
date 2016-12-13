@@ -30,6 +30,7 @@
         {
             this.promotionsButton = new System.Windows.Forms.Button();
             this.vehiclesButton = new System.Windows.Forms.Button();
+            this.customersButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // promotionsButton
@@ -52,11 +53,22 @@
             this.vehiclesButton.UseVisualStyleBackColor = true;
             this.vehiclesButton.Click += new System.EventHandler(this.vehiclesButton_Click);
             // 
+            // customersButton
+            // 
+            this.customersButton.Location = new System.Drawing.Point(35, 159);
+            this.customersButton.Name = "customersButton";
+            this.customersButton.Size = new System.Drawing.Size(125, 41);
+            this.customersButton.TabIndex = 4;
+            this.customersButton.Text = "Customers";
+            this.customersButton.UseVisualStyleBackColor = true;
+            this.customersButton.Click += new System.EventHandler(this.customersButton_Click);
+            // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(193, 171);
+            this.ClientSize = new System.Drawing.Size(193, 232);
+            this.Controls.Add(this.customersButton);
             this.Controls.Add(this.vehiclesButton);
             this.Controls.Add(this.promotionsButton);
             this.Margin = new System.Windows.Forms.Padding(1);
@@ -70,6 +82,7 @@
         #endregion
         private System.Windows.Forms.Button promotionsButton;
         private System.Windows.Forms.Button vehiclesButton;
+        private System.Windows.Forms.Button customersButton;
     }
 }
 

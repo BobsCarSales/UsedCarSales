@@ -24,7 +24,6 @@ C:\Users\Brett\Desktop\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.AddCusto
 C:\Users\Brett\Desktop\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.AddVehicleForm.resources
 \\Mac\Home\Development\UsedCarSales\UsedCarSales\bin\Debug\EntityFramework.dll
 \\Mac\Home\Development\UsedCarSales\UsedCarSales\bin\Debug\EntityFramework.xml
-\\Mac\Home\Development\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.AddCustomerForm.resources
 \\Mac\Home\Development\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.AddEditVehicleForm.resources
 \\Mac\Home\Development\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.ViewVehicleForm.resources
 C:\Users\Christian\Development\UsedCarSales\UsedCarSales\bin\Debug\UsedCarSales.exe.config
@@ -77,3 +76,6 @@ C:\Users\bnapi\Desktop\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.exe
 C:\Users\bnapi\Desktop\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.pdb
 \\Mac\Home\Development\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.TransactionForm.resources
 \\Mac\Home\Development\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.csprojResolveAssemblyReference.cache
+\\Mac\Home\Development\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.EditCustomerForm.resources
+\\Mac\Home\Development\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.CustomersForm.resources
+\\Mac\Home\Development\UsedCarSales\UsedCarSales\obj\Debug\UsedCarSales.ViewCustomerForm.resources
