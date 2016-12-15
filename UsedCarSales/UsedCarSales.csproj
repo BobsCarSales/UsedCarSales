@@ -70,32 +70,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomerPartial.cs" />
-    <Compile Include="EditCustomerForm.cs">
+    <Compile Include="Partials\CustomerPartial.cs" />
+    <Compile Include="Forms\EditCustomerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditCustomerForm.Designer.cs">
+    <Compile Include="Forms\EditCustomerForm.Designer.cs">
       <DependentUpon>EditCustomerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddEditPromotionForm.cs">
+    <Compile Include="Forms\AddEditPromotionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddEditPromotionForm.Designer.cs">
+    <Compile Include="Forms\AddEditPromotionForm.Designer.cs">
       <DependentUpon>AddEditPromotionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddEditVehicleForm.cs">
+    <Compile Include="Forms\AddEditVehicleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddEditVehicleForm.Designer.cs">
+    <Compile Include="Forms\AddEditVehicleForm.Designer.cs">
       <DependentUpon>AddEditVehicleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Customer.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="CustomersForm.cs">
+    <Compile Include="Forms\CustomersForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CustomersForm.Designer.cs">
+    <Compile Include="Forms\CustomersForm.Designer.cs">
       <DependentUpon>CustomersForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DataAccessObjects\CustomerDAO.cs" />
@@ -120,10 +120,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EntityModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="HomeForm.cs">
+    <Compile Include="Forms\HomeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HomeForm.Designer.cs">
+    <Compile Include="Forms\HomeForm.Designer.cs">
       <DependentUpon>HomeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Make.cs">
@@ -136,63 +136,63 @@
     <Compile Include="Promotion.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="PromotionPartial.cs" />
-    <Compile Include="PromotionsForm.cs">
+    <Compile Include="Partials\PromotionPartial.cs" />
+    <Compile Include="Forms\PromotionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PromotionsForm.Designer.cs">
+    <Compile Include="Forms\PromotionsForm.Designer.cs">
       <DependentUpon>PromotionsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transaction.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="TransactionForm.cs">
+    <Compile Include="Forms\TransactionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TransactionForm.Designer.cs">
+    <Compile Include="Forms\TransactionForm.Designer.cs">
       <DependentUpon>TransactionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="TransactionPartial.cs" />
+    <Compile Include="Partials\TransactionPartial.cs" />
     <Compile Include="Vehicle.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="VehiclePartial.cs" />
-    <Compile Include="VehiclesForm.cs">
+    <Compile Include="Partials\VehiclePartial.cs" />
+    <Compile Include="Forms\VehiclesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="VehiclesForm.Designer.cs">
+    <Compile Include="Forms\VehiclesForm.Designer.cs">
       <DependentUpon>VehiclesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewCustomerForm.cs">
+    <Compile Include="Forms\ViewCustomerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ViewCustomerForm.Designer.cs">
+    <Compile Include="Forms\ViewCustomerForm.Designer.cs">
       <DependentUpon>ViewCustomerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewVehicleForm.cs">
+    <Compile Include="Forms\ViewVehicleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ViewVehicleForm.Designer.cs">
+    <Compile Include="Forms\ViewVehicleForm.Designer.cs">
       <DependentUpon>ViewVehicleForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DateUtil.cs" />
-    <EmbeddedResource Include="EditCustomerForm.resx">
+    <Compile Include="Util\DateUtil.cs" />
+    <EmbeddedResource Include="Forms\EditCustomerForm.resx">
       <DependentUpon>EditCustomerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddEditPromotionForm.resx">
+    <EmbeddedResource Include="Forms\AddEditPromotionForm.resx">
       <DependentUpon>AddEditPromotionForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddEditVehicleForm.resx">
+    <EmbeddedResource Include="Forms\AddEditVehicleForm.resx">
       <DependentUpon>AddEditVehicleForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomersForm.resx">
+    <EmbeddedResource Include="Forms\CustomersForm.resx">
       <DependentUpon>CustomersForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HomeForm.resx">
+    <EmbeddedResource Include="Forms\HomeForm.resx">
       <DependentUpon>HomeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PromotionsForm.resx">
+    <EmbeddedResource Include="Forms\PromotionsForm.resx">
       <DependentUpon>PromotionsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -204,16 +204,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="TransactionForm.resx">
+    <EmbeddedResource Include="Forms\TransactionForm.resx">
       <DependentUpon>TransactionForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="VehiclesForm.resx">
+    <EmbeddedResource Include="Forms\VehiclesForm.resx">
       <DependentUpon>VehiclesForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ViewCustomerForm.resx">
+    <EmbeddedResource Include="Forms\ViewCustomerForm.resx">
       <DependentUpon>ViewCustomerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ViewVehicleForm.resx">
+    <EmbeddedResource Include="Forms\ViewVehicleForm.resx">
       <DependentUpon>ViewVehicleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="EntityModel.edmx">
