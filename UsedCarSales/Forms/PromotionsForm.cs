@@ -28,20 +28,23 @@ namespace UsedCarSales
             initializePromotionListBox();
         }
 
+        //Initialize Promotions List box. Set up Event handlers and disable buttons that shouldn't be enabled if a promotion isn't selected
         private void initializePromotionListBox()
         {
             editPromotionButton.Enabled = false;
             removePromotionButton.Enabled = false;
 
-            //when a vehicle is selected or deselected, the edit vehicle button needs to be enabled or disabled
+            //when a promotion is selected or deselected, the edit promotion button needs to be enabled or disabled
             this.promotionsListBox.SelectedValueChanged += new System.EventHandler(initializeButtons);
         }
 
+        //using this method because changeButtonEnabledValues is used in other places
         private void initializeButtons(object sender, System.EventArgs e)
         {
             changeButtonEnabledValues();
         }
 
+        //change button enabled values depending on whether or not a promotion is selected
         private void changeButtonEnabledValues()
         {
             if (promotionsListBox.SelectedItem == null)
@@ -81,6 +84,7 @@ namespace UsedCarSales
             return itemList;
         }
 
+        //reload the promotions based on whether the user did a search last or loaded all promotions
         public void ReloadPromotions()
         {
             //reset the list of promotions so old data doesn't hang out after we edit it
@@ -95,6 +99,7 @@ namespace UsedCarSales
             }
         }
 
+        //Get all promotions and update the list box
         private void allPromotionsButton_Click(object sender = null, EventArgs e = null)
         {
             isSearch = false;
@@ -138,6 +143,7 @@ namespace UsedCarSales
 
         private void removePromotionButton_Click(object sender, EventArgs e)
         {
+            //confirm deletion of the promotion
             var confirmResult = MessageBox.Show("Are you sure to delete this promotion?", "Confirm Deletion of Promotion", MessageBoxButtons.YesNo);
 
             if (confirmResult == DialogResult.Yes)

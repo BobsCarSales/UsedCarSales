@@ -35,18 +35,19 @@ namespace UsedCarSales
             applyPromotion();
         }
 
-        //TODO: A PROMOTION SHOULD NOT BE SELECTED WHEN THE FORM LOADS
+        //load all promotions by the make of the current vehicle
         private void initializePromotions()
         {
-            //TODO: ONLY LOAD PROMOTIONS IF THEIR MAKE MATCHES THE CURRENT VEHICLE MAKE
             List<Promotion> allPromotions = new List<Promotion>();
             allPromotions.Add(new Promotion());
             allPromotions.AddRange(PromotionDAO.GetPromotionsByMake(currentVehicle.Model.Make));
             promotionComboBox.DataSource = allPromotions;
         }
-
+        
+        //Apply a promotion to the overall price of the current vehicle
         private void applyPromotion(object sender = null, EventArgs e = null)
         {
+            //if we have a selected promotion, calculate the price. Otherwise change the label to the total price of the vehicle
             Promotion selectedPromotion = (Promotion)promotionComboBox.SelectedItem;
             if(selectedPromotion != null)
             {
@@ -63,6 +64,7 @@ namespace UsedCarSales
             updatePriceLabelLocations();
         }
 
+        //update the location of the price labels depending on how long the price is
         private void updatePriceLabelLocations()
         {
             fullPriceValueLabel.Location = new Point(defaultLabelPosition - (3 * fullPriceValueLabel.Text.ToString().Length - 1), //subtracting 1 for the decimal place
@@ -71,11 +73,13 @@ namespace UsedCarSales
                                                     adjustedPriceValueLabel.Location.Y);
         }
 
+        //close the form
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        //Create the customer and transaction objects to be added to the database
         private void makeSaleButton_Click(object sender, EventArgs e)
         {
             if (!errorOnForm())
@@ -91,7 +95,6 @@ namespace UsedCarSales
                 Transaction transaction = new Transaction();
                 transaction.Customer = customer;
                 transaction.Vehicle = currentVehicle;
-                //TODO: need code for setting vehicle to sold and any other work that goes along with that
                 transaction.date = DateTime.Now;
 
                 //get rid of the $ character from the beginning of the string
@@ -106,6 +109,7 @@ namespace UsedCarSales
             }
         }
 
+        //add the transaction to the database, which will cascade save the vehicle and customer associated with it
         private void confirmSale(Transaction transaction)
         {
             var confirmResult = MessageBox.Show("Are you sure you want to make this sale?\n" + currentVehicle + "\nFinal Price: $" + transaction.totalCost, "Confirm Sale", MessageBoxButtons.YesNo);
@@ -123,6 +127,7 @@ namespace UsedCarSales
             }
         }
 
+        //if an error occurs on the form, show the error to the user and return true so that the program will not continue saving the transaction
         private bool errorOnForm()
         {
             bool error = false;

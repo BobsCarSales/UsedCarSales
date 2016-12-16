@@ -32,6 +32,7 @@ namespace UsedCarSales
             initializeMakes();
         }
 
+        //Reload vehicles list based on whether user previously searched or loaded all vehicles. Used when a new vehicle is added to the Vehicles table
         public void ReloadVehicles()
         {
             //reset the list of promotions so old data doesn't hang out after we edit it
@@ -47,17 +48,20 @@ namespace UsedCarSales
             }
         }
 
+        //Update the vehicles list with the Vehicles in newVehiclesList
         private void updateVehiclesComboBox(List<Vehicle> newVehiclesList)
         {
             vehicles = newVehiclesList;
             vehiclesListBox.DataSource = vehicles;
 
+            //If there are no vehicles, disable the buttons that rely on a Vehicle being selected
             if (vehicles.Count < 1)
             {
                 changeButtonEnabledValues();
             }
         }
 
+        //change button enabled values based on whether a Vehicle is selected when its called
         private void changeButtonEnabledValues(object sender = null, System.EventArgs e = null)
         {
             Boolean enabled = (vehiclesListBox.SelectedItem == null) ? false : true;
@@ -66,6 +70,7 @@ namespace UsedCarSales
             viewVehicleButton.Enabled = enabled;
             removeVehicleButton.Enabled = enabled;
 
+            //only enable the Sell Vehicle button if the SelectedVehicle has not already been sold
             Vehicle vehicle = (Vehicle) vehiclesListBox.SelectedItem;
             if(vehicle != null)
             {
@@ -89,8 +94,7 @@ namespace UsedCarSales
             makeDropDownBox.DataSource = allMakes;
         }
 
-        //TODO: will be called everytime makeDropDown changes, need to move some of the init stuff out
-        //TODO: this should not be called when form is loading. it currently is being called
+        //Load models after a make has been selected. Only load Models that have the selected Make
         private void loadModels(object sender, System.EventArgs e)
         {
             if(makeDropDownBox.SelectedItem != null)
@@ -131,17 +135,20 @@ namespace UsedCarSales
 
             Vehicle vehicle = new Vehicle();
 
+            //get the search criteria that the user input
             vehicle.Model = (Model)modelDropDownBox.SelectedItem;
             vehicle.used = usedCheckBox.Checked;
             vehicle.sold = soldCheckBox.Checked;
             vehicle.year = DateUtil.HandleYearString(yearTextBox.Text.ToString());
 
+            //check if theres a minimum price to search by
             decimal? minPrice = null;
             if (!minPriceTextBox.Text.ToString().Equals("Min"))
             {
                 minPrice = getDecimalPriceFromString(minPriceTextBox.Text.ToString());
             }
 
+            //check if theres a maximum price to search by
             decimal? maxPrice = null;
             if (!maxPriceTextBox.Text.ToString().Equals("Max"))
             {
@@ -151,6 +158,7 @@ namespace UsedCarSales
             updateVehiclesComboBox(VehicleDAO.SearchVehicles(vehicle, minPrice, maxPrice));
         }
 
+        //seperate method for this so that the other methods that do this don't get cluttered
         private decimal? getDecimalPriceFromString(string text)
         {
             decimal? price = null;

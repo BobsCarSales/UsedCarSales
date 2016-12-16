@@ -27,11 +27,13 @@ namespace UsedCarSales
             editCustomerButton.Enabled = false;
         }
 
+        //reload the list of customers
         public void ReloadCustomers()
         {
             //reset the list of promotions so old data doesn't hang out after we edit it
             customersListBox.DataSource = null;
 
+            //load customers based on search criteria, or just load all of the vehicles
             if (isSearch)
             {
                 searchCustomersButton_Click();
@@ -42,6 +44,7 @@ namespace UsedCarSales
             }
         }
 
+        //change edit and view buttons to disabled if a Customer is not selected
         private void changeButtonEnabledValues(object sender = null, System.EventArgs e = null)
         {
             Boolean enabled = (customersListBox.SelectedItem == null) ? false : true;

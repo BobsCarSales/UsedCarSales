@@ -25,7 +25,7 @@ namespace UsedCarSales
             InitializeForm(makes);
         }
 
-
+        //initialize the Models drop down
         private void InitializeDropDowns()
         {
             // Associate the event-handling method with the 
@@ -35,10 +35,12 @@ namespace UsedCarSales
 
         public void InitializeForm(List<Make> makes)
         {
+            //INitialize the Makes drop down with the makes passed from the VehiclesForm
             makeDropDown.DisplayMember = "Id";
             makeDropDown.ValueMember = "Id";
             makeDropDown.DataSource = makes;
 
+            //if we're editing, fill in all of the text fields with information from the Vehicle we're editing
             if (CurrentVehicle != null)
             {
                 if (CurrentVehicle.Model.Make != null) makeDropDown.SelectedItem = CurrentVehicle.Model.Make;
@@ -50,6 +52,7 @@ namespace UsedCarSales
             }
         }
 
+        //confirm that we're ready to save the Vehicle we're editing/adding
         private void confirmButton_Click(object sender, EventArgs e)
         {
             decimal price;
@@ -59,8 +62,10 @@ namespace UsedCarSales
 
                 if(price > 0)
                 {
+                    //if adding
                     if (mode == ADD_VEHICLE)
                     {
+                        //create the Vehicle object
                         Vehicle vehicle = new Vehicle();
                         vehicle.Model = (Model)modelDropDown.SelectedItem;
                         vehicle.sold = soldCheckBox.Checked;
@@ -68,8 +73,10 @@ namespace UsedCarSales
                         vehicle.year = DateUtil.HandleYearString(yearTextBox.Text.ToString());
                         vehicle.price = price;
 
+                        //check that the user hasn't entered an invalid year
                         if (vehicle.year != DateUtil.INVALID_YEAR)
                         {
+                            //save the vehicle
                             VehicleDAO.AddVehicle(vehicle);
 
                             //add the new vehicle to the list so it shows when the user goes back to the VehiclesForm
@@ -80,24 +87,29 @@ namespace UsedCarSales
                         }
                         else
                         {
+                            //if the date is invalid, ask the user to enter it again without saving the vehicle
                             MessageBox.Show("Please enter a valid year", "Invalid Year Value", MessageBoxButtons.OK);
                         }
                     }
                     else if (mode == EDIT_VEHICLE)
                     {
+                        //reassign all of the fields of the current Vehicle object with the information the user entered
                         CurrentVehicle.Model = (Model)modelDropDown.SelectedItem;
                         CurrentVehicle.sold = soldCheckBox.Checked;
                         CurrentVehicle.used = usedCheckBox.Checked;
                         CurrentVehicle.year = DateUtil.HandleYearString(yearTextBox.Text.ToString());
                         CurrentVehicle.price = price;
 
+                        //make sure an invalid year isn't entered
                         if (CurrentVehicle.year != DateUtil.INVALID_YEAR)
                         {
+                            //update the vehicle in the database
                             VehicleDAO.EditVehicle(CurrentVehicle);
                             closeForm();
                         }
                         else
                         {
+                            //if the date is invalid, ask the user to enter it again without saving the vehicle
                             MessageBox.Show("Please enter a valid year", "Invalid Year Value", MessageBoxButtons.OK);
                         }
                     }
